@@ -1,0 +1,13 @@
+server:
+  port: 7788
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: CampusNews
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/campusnews?characterEncoding=utf8
+    username: root
+    password: root
+logging.level.team: debug

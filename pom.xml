@@ -7,7 +7,7 @@
     <artifactId>campusnews</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-
+ 
     <name>CampusNews</name>
     <description>校园新闻</description>
 

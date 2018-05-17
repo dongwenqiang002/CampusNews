@@ -9,4 +9,5 @@ public class CampusNewsApplication {
     public static void main(String[] args) {
         SpringApplication.run(CampusNewsApplication.class, args);
     }
+
 }

@@ -72,17 +72,5 @@ public class UserVerificationConfig implements AuthenticationProvider {
 
 
 
-    /****************去除权限验证的前缀********************/
-    @Bean
-    public SecurityExpressionHandler<FilterInvocation> webExpressionHandler() {
-        DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new DefaultWebSecurityExpressionHandler();
-        defaultWebSecurityExpressionHandler.setDefaultRolePrefix("");
-        return defaultWebSecurityExpressionHandler;
-    }
-
-    @Bean
-    GrantedAuthorityDefaults grantedAuthorityDefaults() {
-        return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix
-    }
 
 }

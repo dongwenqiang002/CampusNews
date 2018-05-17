@@ -4,18 +4,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 public class User implements UserDetails {
     private Integer id;
 
     private String username;
 
-    //private String password;
-
-
-   // private String role;
 
     private String code;
 
@@ -27,6 +22,7 @@ public class User implements UserDetails {
 
     private Integer age;
 
+    private List<String> role;
     public String getCode() {
         return code;
     }
@@ -84,22 +80,24 @@ public class User implements UserDetails {
         //TODO
     }
 
-    public String getRole() {
-       /* if(role == null || role.isEmpty()){
-            role = "默认";
-        }*/
-       //TODO
-        return "默认";
+    public List<String> getRole() {
+        if(role == null || role.isEmpty()){
+            return Collections.singletonList("无权限");
+        }
+        return this.role;
     }
 
-    public void setRole(String role) {
+    public void setRole(List<String> role) {
         //this.role = role;
         //TODO
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(this.getRole()));
+        new ArrayList<? extends GrantedAuthority>()
+        new SimpleGrantedAuthority(this.getRole())
+
+        return Collections.singletonList();
     }
 
     @Override

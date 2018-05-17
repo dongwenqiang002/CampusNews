@@ -71,6 +71,32 @@ CREATE TABLE `major` (
 
 insert  into `major`(`id`,`name`,`college_id`) values (1,'软件工程',1);
 
+/*Table structure for table `new_publish` */
+
+DROP TABLE IF EXISTS `new_publish`;
+
+CREATE TABLE `new_publish` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `new_id` int(11) NOT NULL COMMENT '新闻ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '指定所要给的个人',
+  `class_id` int(11) DEFAULT NULL COMMENT '指定班级',
+  `college_id` int(11) DEFAULT NULL COMMENT '指定学院',
+  `all` tinyint(1) DEFAULT NULL COMMENT '指定是否所有人',
+  PRIMARY KEY (`id`),
+  KEY `new_id` (`new_id`),
+  KEY `user_id` (`user_id`),
+  KEY `college_id` (`college_id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `new_publish_ibfk_1` FOREIGN KEY (`new_id`) REFERENCES `news` (`id`),
+  CONSTRAINT `new_publish_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `new_publish_ibfk_3` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`),
+  CONSTRAINT `new_publish_ibfk_4` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `new_publish` */
+
+insert  into `new_publish`(`id`,`new_id`,`user_id`,`class_id`,`college_id`,`all`) values (1,1,1,NULL,NULL,NULL),(2,1,2,NULL,NULL,NULL);
+
 /*Table structure for table `news` */
 
 DROP TABLE IF EXISTS `news`;
@@ -91,31 +117,25 @@ CREATE TABLE `news` (
 
 insert  into `news`(`id`,`context`,`title`,`pubdate`,`author`,`remark`) values (1,'毋庸置疑，Spring Boot在众多从事Java微服务开发的程序员群体中是一个很特别的存在。说它特别是因为它确实简化了基于Spring技术栈的应用/微服务开发过程，使得我们能够很快速地就搭建起一个应用的脚手架并在其上进行项目的开发，再也不用像以前那样使用大量的XML或是注解了，应用在这样的约定优于配置的前提下可以以最快的速度创建出来。','我眼中的Spring Boot','2018-05-17 13:28:50',1,'转载自CSDN');
 
-/*Table structure for table `publish_new` */
+/*Table structure for table `news_detail` */
 
-DROP TABLE IF EXISTS `publish_new`;
+DROP TABLE IF EXISTS `news_detail`;
 
-CREATE TABLE `publish_new` (
+CREATE TABLE `news_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `new_id` int(11) NOT NULL COMMENT '新闻ID',
-  `user_id` int(11) DEFAULT NULL COMMENT '指定所要给的个人',
-  `class_id` int(11) DEFAULT NULL COMMENT '指定班级',
-  `college_id` int(11) DEFAULT NULL COMMENT '指定学院',
-  `all` tinyint(1) DEFAULT NULL COMMENT '指定是否所有人',
+  `type_name` varchar(20) DEFAULT NULL COMMENT '新闻类型',
+  `Importance` int(11) DEFAULT NULL COMMENT '新闻重要程度',
+  `deadline` date DEFAULT NULL COMMENT '新闻过期时间',
+  `Importance_deadline` date DEFAULT NULL COMMENT '新闻重要性有效时间',
+  `news_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `new_id` (`new_id`),
-  KEY `user_id` (`user_id`),
-  KEY `college_id` (`college_id`),
-  KEY `class_id` (`class_id`),
-  CONSTRAINT `publish_new_ibfk_1` FOREIGN KEY (`new_id`) REFERENCES `news` (`id`),
-  CONSTRAINT `publish_new_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `publish_new_ibfk_3` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`),
-  CONSTRAINT `publish_new_ibfk_4` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `news_id` (`news_id`),
+  CONSTRAINT `news_detail_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-/*Data for the table `publish_new` */
+/*Data for the table `news_detail` */
 
-insert  into `publish_new`(`id`,`new_id`,`user_id`,`class_id`,`college_id`,`all`) values (1,1,1,NULL,NULL,NULL),(2,1,2,NULL,NULL,NULL);
+insert  into `news_detail`(`id`,`type_name`,`Importance`,`deadline`,`Importance_deadline`,`news_id`) values (1,'学习',1,'2018-05-24','2018-05-20',1);
 
 /*Table structure for table `role` */
 

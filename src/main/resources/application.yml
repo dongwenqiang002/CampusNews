@@ -7,7 +7,10 @@ spring:
     name: CampusNews
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/campusnews?characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/campusnews?characterEncoding=utf8&useSSL=true
     username: root
     password: root
-logging.level.team: debug
+logging.level.team.ahile: debug
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: team.agile.campusnews.app.model

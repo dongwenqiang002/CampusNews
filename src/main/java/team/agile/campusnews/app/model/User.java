@@ -12,10 +12,60 @@ public class User implements UserDetails {
 
     private String username;
 
-    private String password;
+    //private String password;
 
 
-    private String role;
+   // private String role;
+
+    private String code;
+
+    private String name;
+
+    private String phone;
+
+    private String sex;
+
+    private Integer age;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
     public Integer getId() {
         return id;
@@ -30,18 +80,21 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+      //  this.password = password;
+        //TODO
     }
 
     public String getRole() {
-        if(role == null || role.isEmpty()){
+       /* if(role == null || role.isEmpty()){
             role = "默认";
-        }
-        return role;
+        }*/
+       //TODO
+        return "默认";
     }
 
     public void setRole(String role) {
-        this.role = role;
+        //this.role = role;
+        //TODO
     }
 
     @Override
@@ -51,7 +104,8 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+
+        return "no password!";
     }
 
     @Override

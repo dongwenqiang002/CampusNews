@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.agile.campusnews.app.mapper.PublishNewMapper">
+  <resultMap id="BaseResultMap" type="team.agile.campusnews.app.model.PublishNew">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="new_id" jdbcType="INTEGER" property="newId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
+    <result column="college_id" jdbcType="INTEGER" property="collegeId" />
+    <result column="all" jdbcType="BIT" property="all" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, new_id, user_id, class_id, college_id, all
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from publish_new
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from publish_new
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="team.agile.campusnews.app.model.PublishNew">
+    insert into publish_new (id, new_id, user_id, 
+      class_id, college_id, all
+      )
+    values (#{id,jdbcType=INTEGER}, #{newId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{classId,jdbcType=INTEGER}, #{collegeId,jdbcType=INTEGER}, #{all,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.PublishNew">
+    insert into publish_new
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="newId != null">
+        new_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="collegeId != null">
+        college_id,
+      </if>
+      <if test="all != null">
+        all,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="newId != null">
+        #{newId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null">
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="all != null">
+        #{all,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.app.model.PublishNew">
+    update publish_new
+    <set>
+      <if test="newId != null">
+        new_id = #{newId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null">
+        college_id = #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="all != null">
+        all = #{all,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.app.model.PublishNew">
+    update publish_new
+    set new_id = #{newId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      class_id = #{classId,jdbcType=INTEGER},
+      college_id = #{collegeId,jdbcType=INTEGER},
+      all = #{all,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

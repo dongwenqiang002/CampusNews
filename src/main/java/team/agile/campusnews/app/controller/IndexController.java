@@ -17,8 +17,18 @@ public class IndexController {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 
     @GetMapping("/")
+<<<<<<< HEAD
+    public User  index(){
+        User user = new User();
+        user.setPassword("1124aaa");
+        user.setUsername("DDWWQQ");
+        user.setRole("aaa");
+        LOGGER.info("访问");
+        return user;
+=======
     public String index(HttpServletResponse response){
         return "index";
+>>>>>>> 34096d99e73f682e17a7d9bf2b5813f46291c9fc
     }
 
     @PostMapping("/jj")

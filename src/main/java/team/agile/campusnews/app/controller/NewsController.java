@@ -10,6 +10,7 @@ import team.agile.campusnews.app.model.News;
 import team.agile.campusnews.app.model.User;
 import team.agile.campusnews.app.service.NewsService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -26,10 +27,13 @@ public class NewsController {
     private NewsService newsService;
 
     @GetMapping("/get")
-    public List<News> getNews(Principal user){
-        String userName  = user.getName();
-        return newsService.getNews(userName);
-        //return  null;
+    public List<News> getNews(Principal user,, HttpServletRequest request) {
+        String userName = user.getName();
+        if (request.isUserInRole("学生")) {
+            return newsService.getNews(userName);
+        }else{
+            return null;
+        }
     }
 
     @Autowired

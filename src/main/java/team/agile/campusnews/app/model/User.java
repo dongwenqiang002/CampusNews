@@ -11,7 +11,6 @@ public class User implements UserDetails {
 
     private String username;
 
-
     private String code;
 
     private String name;
@@ -23,6 +22,7 @@ public class User implements UserDetails {
     private Integer age;
 
     private List<String> role;
+
     public String getCode() {
         return code;
     }
@@ -88,16 +88,17 @@ public class User implements UserDetails {
     }
 
     public void setRole(List<String> role) {
-        //this.role = role;
-        //TODO
+        this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        new ArrayList<? extends GrantedAuthority>()
-        new SimpleGrantedAuthority(this.getRole())
+        List<SimpleGrantedAuthority> ro = new ArrayList<>();
+        this.role.forEach(v->{
+            ro.add(new SimpleGrantedAuthority(v));
+        });
 
-        return Collections.singletonList();
+        return ro;
     }
 
     @Override

@@ -18,7 +18,13 @@
     from news
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectNewsOnAll"  resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from news
+      where all = true
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from news
     where id = #{id,jdbcType=INTEGER}
   </delete>

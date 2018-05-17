@@ -35,8 +35,6 @@ CREATE TABLE `class` (
 
 /*Data for the table `class` */
 
-insert  into `class`(`id`,`major_id`,`name`,`code`,`instructor`) values (1,1,'软件班','1502',1);
-
 /*Table structure for table `college` */
 
 DROP TABLE IF EXISTS `college`;
@@ -151,25 +149,24 @@ CREATE TABLE `role` (
 
 insert  into `role`(`id`,`role_name`) values (1,'学生'),(2,'老师'),(3,'系主任'),(4,'管理员'),(5,'校级新闻发布'),(6,'院级新闻发布'),(7,'班级新闻发布');
 
-/*Table structure for table `student` */
+/*Table structure for table `schoolos` */
 
-DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `schoolos`;
 
-CREATE TABLE `student` (
+CREATE TABLE `schoolos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL COMMENT '学生用户ID',
-  `number` varchar(50) DEFAULT NULL COMMENT '学号',
-  `class_id` int(11) NOT NULL COMMENT '所属班级',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `parent_id` int(11) DEFAULT NULL COMMENT '父组织ID',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `code` varchar(100) DEFAULT NULL COMMENT '编号',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `class_id` (`class_id`),
-  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `student_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `parent_id` (`parent_id`),
+  CONSTRAINT `schoolos_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `schoolos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
-/*Data for the table `student` */
+/*Data for the table `schoolos` */
 
-insert  into `student`(`id`,`user_id`,`number`,`class_id`) values (1,2,'201522224154',1);
+insert  into `schoolos`(`id`,`name`,`parent_id`,`remark`,`code`) values (1,'西安财经学院',NULL,'学校',''),(2,'经济学院',1,'学校院系',NULL),(3,'管理学院',1,'学校院系',NULL),(4,'商学院',1,'学校院系',NULL),(5,'统计学院',1,'学校院系',NULL),(6,'信息学院',1,'学校院系',NULL),(7,'法学院',1,'学校院系',NULL),(8,'文学院',1,'学校院系',NULL),(9,'公共管理学院',1,'学校院系',NULL),(10,'外国语学院',1,'学校院系',NULL),(11,'继续教育学院',1,'学校院系',NULL),(12,'国际教育学院',1,'学校院系',NULL),(13,'马克思主义学院',1,'学校院系',NULL),(14,'体育教学部',1,'学校院系',NULL);
 
 /*Table structure for table `user` */
 
@@ -208,6 +205,31 @@ CREATE TABLE `user_role` (
 /*Data for the table `user_role` */
 
 insert  into `user_role`(`id`,`user_id`,`role_id`) values (1,1,4),(2,2,1),(3,2,5);
+
+/*Table structure for table `user_schoolos` */
+
+DROP TABLE IF EXISTS `user_schoolos`;
+
+CREATE TABLE `user_schoolos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `schoolOS_is` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `user_schoolos` */
+
+/*Table structure for table `user_student` */
+
+DROP TABLE IF EXISTS `user_student`;
+
+CREATE TABLE `user_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_code` varchar(100) DEFAULT NULL COMMENT '学号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `user_student` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

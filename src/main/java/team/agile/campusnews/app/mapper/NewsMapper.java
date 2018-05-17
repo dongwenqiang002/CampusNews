@@ -2,6 +2,9 @@ package team.agile.campusnews.app.mapper;
 
 import org.springframework.stereotype.Repository;
 import team.agile.campusnews.app.model.News;
+
+import java.util.List;
+
 @Repository
 public interface NewsMapper {
     int deleteByPrimaryKey(Integer id);
@@ -15,4 +18,7 @@ public interface NewsMapper {
     int updateByPrimaryKeySelective(News record);
 
     int updateByPrimaryKey(News record);
+
+
+    List<News> selectNewsOnAll();
 }

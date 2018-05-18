@@ -7,11 +7,8 @@ import org.springframework.stereotype.Service;
 import team.agile.campusnews.app.mapper.NewsMapper;
 import team.agile.campusnews.app.mapper.StuClassMapper;
 import team.agile.campusnews.app.mapper.UserMapper;
-import team.agile.campusnews.app.model.News;
-import team.agile.campusnews.app.model.StuClass;
 import team.agile.campusnews.app.model.User;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

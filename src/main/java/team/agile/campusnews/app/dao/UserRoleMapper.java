@@ -1,8 +1,5 @@
-package team.agile.campusnews.app.mapper;
+package team.agile.campusnews.app.dao;
 
-import org.springframework.stereotype.Repository;
-import team.agile.campusnews.app.model.UserRoleKey;
-@Repository
 public interface UserRoleMapper {
     int deleteByPrimaryKey(UserRoleKey key);
 

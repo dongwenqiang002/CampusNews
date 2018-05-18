@@ -1,8 +1,5 @@
-package team.agile.campusnews.app.mapper;
+package team.agile.campusnews.app.dao;
 
-import org.springframework.stereotype.Repository;
-import team.agile.campusnews.app.model.Role;
-@Repository
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -32,6 +32,12 @@ public class LoginController {
                 "            <button type=\"submit\">提交</button>\n" +
                 "        </form>";
     }
+    @RequestMapping("/wxlogin")
+    public String wxLogin(String code){
+        LOGGER.info("微信登录");
+        LOGGER.info("{}",code);
+        return "OK";
+    }
 
     /**
      * 登录失败URL

@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.agile.campusnews.app.mapper.NewsMapper;
-import team.agile.campusnews.app.mapper.StuClassMapper;
-import team.agile.campusnews.app.mapper.UserMapper;
+import team.agile.campusnews.app.dao.NewsMapper;
+import team.agile.campusnews.app.dao.UserMapper;
+import team.agile.campusnews.app.model.News;
 import team.agile.campusnews.app.model.User;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class NewsService {
 
     private NewsMapper newsMapper;
     private UserMapper userMapper;
-    private StuClassMapper stuClassMapper;
+    //private StuClassMapper stuClassMapper;
 
     public List<News> getNews(String userName) {
         //TODO 获取新闻
@@ -30,7 +30,7 @@ public class NewsService {
         //user.getRole()
         //该用户可以看到的新闻
 
-        List<News> newsList = newsMapper.selectNewsOnAll();
+        //List<News> newsList = newsMapper.selectNewsOnAll();
 
         return null;
     }
@@ -39,9 +39,9 @@ public class NewsService {
 
 
     @Autowired
-    public NewsService(NewsMapper newsMapper,UserMapper userMapper,StuClassMapper stuClassMapper) {
+    public NewsService(NewsMapper newsMapper,UserMapper userMapper) {
         this.newsMapper = newsMapper;
         this.userMapper = userMapper;
-        this.stuClassMapper = stuClassMapper;
+        //this.stuClassMapper = stuClassMapper;
     }
 }

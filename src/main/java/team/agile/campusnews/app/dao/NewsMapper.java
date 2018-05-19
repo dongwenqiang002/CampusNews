@@ -1,7 +1,9 @@
 package team.agile.campusnews.app.dao;
 
+import org.springframework.stereotype.Repository;
 import team.agile.campusnews.app.model.News;
 
+@Repository
 public interface NewsMapper {
     int deleteByPrimaryKey(Integer id);
 

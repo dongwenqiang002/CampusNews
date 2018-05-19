@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import team.agile.campusnews.app.mapper.UserMapper;
+import team.agile.campusnews.app.dao.UserMapper;
 import team.agile.campusnews.app.model.User;
 
 /**

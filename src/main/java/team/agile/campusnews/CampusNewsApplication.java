@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("team.agile.campusnews.app.mapper")
+@MapperScan("team.agile.campusnews.app.dao")
 public class CampusNewsApplication {
 
     public static void main(String[] args) {

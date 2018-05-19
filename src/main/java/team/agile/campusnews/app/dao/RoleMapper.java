@@ -1,5 +1,7 @@
 package team.agile.campusnews.app.dao;
 
+import team.agile.campusnews.app.model.Role;
+
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
 

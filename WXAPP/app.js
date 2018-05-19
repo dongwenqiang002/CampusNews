@@ -20,6 +20,10 @@ App({
               url: 'http://127.0.0.1:8080/login/wxlogin',
               data: {
                 code: logRes.code
+              },
+              success: function (res) {
+                that.globalData.userInfo = res.data.userInfo;
+                typeof cb == "function" && cb(that.globalData.userInfo)
               }
             })
           }else{

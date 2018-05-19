@@ -32,11 +32,18 @@ public class LoginController {
                 "            <button type=\"submit\">提交</button>\n" +
                 "        </form>";
     }
+
+
     @RequestMapping("/wxlogin")
     public String wxLogin(String code){
         LOGGER.info("微信登录");
         LOGGER.info("{}",code);
-        return "OK";
+
+        return "{\n" +
+                "  \"userInfo\":{\n" +
+                "    \"nickName\": \"dddwww\"\n" +
+                "  }\n" +
+                "}";
     }
 
     /**

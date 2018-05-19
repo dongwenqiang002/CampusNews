@@ -4,7 +4,7 @@ var app = getApp()
 Page( {
   data: {
     userInfo: {},
-    source: 'https://github.com/getweapp/weapp-freshmall'
+    source: 'https://github.'
   },
   //事件处理函数
   bindViewTap: function() {

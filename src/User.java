@@ -2,7 +2,7 @@ package team.agile.campusnews.app.model;
 
 public class User {
     private Integer id;
-
+		//aaaaaaaaaaaaaaaa
     private String username;
 
     private String code;

@@ -5,7 +5,8 @@ public class SchoolOs {
 
     private String name;
 
-    private Integer parentId;
+    //private Integer parentId;
+    private SchoolOs parentSchoolOs;
 
     private String remark;
 
@@ -24,15 +25,15 @@ public class SchoolOs {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
-    public Integer getParentId() {
-        return parentId;
+    public SchoolOs getParentSchoolOs() {
+        return parentSchoolOs;
     }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void setParentSchoolOs(SchoolOs parentSchoolOs) {
+        this.parentSchoolOs = parentSchoolOs;
     }
 
     public String getRemark() {
@@ -40,7 +41,7 @@ public class SchoolOs {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+        this.remark = remark;
     }
 
     public String getCode() {
@@ -48,6 +49,6 @@ public class SchoolOs {
     }
 
     public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+        this.code = code;
     }
 }

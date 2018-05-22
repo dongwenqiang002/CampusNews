@@ -10,7 +10,7 @@ spring:
     url: jdbc:mysql://localhost:3306/campusnews?characterEncoding=utf8&useSSL=true
     username: root
     password: root
-logging.level.team.ahile: debug
+logging.level.team: debug
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: team.agile.campusnews.app.model

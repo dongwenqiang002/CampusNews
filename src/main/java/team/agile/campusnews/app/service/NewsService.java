@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.agile.campusnews.app.dao.NewsMapper;
+import team.agile.campusnews.app.dao.SchoolOsMapper;
 import team.agile.campusnews.app.dao.UserMapper;
 import team.agile.campusnews.app.model.News;
 import team.agile.campusnews.app.model.SchoolOs;
@@ -23,26 +24,45 @@ public class NewsService {
 
     private UserMapper userMapper;
     private NewsMapper newsMapper;
+    private SchoolOsMapper schoolOsMapper;
 
+    /**
+     * @param userName 用户名
+     * @return 此用户可以看到的新闻
+     * @exception null
+     * */
     public List<News> getNews(String userName) {
-        List<News> list =  new ArrayList<>(15);
-        //获取用户实体
-        User user = userMapper.selectByUserName(userName);
-        //user.getRole()
-        //该用户可以看到的新闻
-        List<SchoolOs> schoolOs = user.getSchoolOs();
-        //通过用户所属组织获取 用户可以接受的组织新闻;
-        schoolOs.forEach(v-> list.addAll(newsMapper.selectBySchoolOsID(v.getId())));
-        list.addAll(newsMapper.selectByUserId(user.getId()));
+        List<News> list = new ArrayList<>(15);
+        try {
+            //获取用户实体
+            User user = userMapper.selectByUserName(userName);
 
-        return list;
+            //该用户可以看到的新闻
+            List<SchoolOs> schoolOs = user.getSchoolOs();
+            List<Integer> schoolOsIds = new ArrayList<>(5);
+            //获取用户的组织关系及其上级
+            schoolOs.forEach(v -> {
+                schoolOsIds.add(v.getId());
+                for (SchoolOs parentSchoolOs = v.getParentSchoolOs(); parentSchoolOs != null; parentSchoolOs = parentSchoolOs.getParentSchoolOs()) {
+                    schoolOsIds.add(parentSchoolOs.getId());
+                }
+            });
+            //通过用户ID和用户所属组织获取所有News
+            return newsMapper.selectByUserAll(user.getId(), schoolOsIds);
+
+        } catch (Exception e) {
+            LOGGER.error(e.toString());
+            return null;
+        }
+
+
     }
 
 
     @Autowired
-    public NewsService(UserMapper userMapper,NewsMapper newsMapper) {
+    public NewsService(UserMapper userMapper, NewsMapper newsMapper, SchoolOsMapper schoolOsMapper) {
         this.userMapper = userMapper;
         this.newsMapper = newsMapper;
-        /*this.stuClassMapper = stuClassMapper;*/
+        this.schoolOsMapper = schoolOsMapper;
     }
 }

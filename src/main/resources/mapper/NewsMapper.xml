@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.agile.campusnews.app.dao.NewsMapper">
+    <resultMap id="BaseResultMap" type="team.agile.campusnews.app.model.News">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="context" jdbcType="VARCHAR" property="context"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="pubdate" jdbcType="TIMESTAMP" property="pubdate"/>
+        <result column="author" jdbcType="INTEGER" property="author"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <association property="type" javaType="string" column="type" select="selectNewsTypeByTypeId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, context, title, pubdate, author, remark, end_time, `type`
+  </sql>
+    <!--用于关联查询,不对外-->
+    <select id="selectNewsTypeByTypeId" parameterType="int" resultType="string">
+    SELECT type_name FROM news_type WHERE id = #{type}
+  </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from news
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByUserAll" resultMap="BaseResultMap">
+        SELECT * FROM news WHERE id IN (
+        SELECT news_id FROM publish_news WHERE user_id =#{userId} OR schoolOS_id IN
+        <foreach collection="sIds" item="schoolOsId"
+                 open="(" close=")" separator=",">
+            #{schoolOsId}
+        </foreach>
+        )
+    </select>
+
+    <select id="selectBySchoolOsID" parameterType="int" resultMap="BaseResultMap">
+    SELECT * FROM news WHERE id IN (
+	 SELECT news_id FROM publish_news WHERE schoolOS_id = #{schoolOsID})
+  </select>
+
+    <select id="selectByUserId" parameterType="int" resultMap="BaseResultMap">
+      SELECT * FROM news WHERE id IN (
+	    SELECT news_id FROM publish_news WHERE user_id = #{userId})
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="team.agile.campusnews.app.model.News">
+    insert into news (id, context, title, 
+      pubdate, author, remark, 
+      end_time, `type`)
+    values (#{id,jdbcType=INTEGER}, #{context,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{pubdate,jdbcType=TIMESTAMP}, #{author,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.News">
+        insert into news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="context != null">
+                context,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="pubdate != null">
+                pubdate,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="context != null">
+                #{context,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="pubdate != null">
+                #{pubdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.app.model.News">
+        update news
+        <set>
+            <if test="context != null">
+                context = #{context,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="pubdate != null">
+                pubdate = #{pubdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.app.model.News">
+    update news
+    set context = #{context,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      pubdate = #{pubdate,jdbcType=TIMESTAMP},
+      author = #{author,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      `type` = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

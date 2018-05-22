@@ -69,4 +69,10 @@ public class LoginController {
     public Boolean loginOK() {
         return true;
     }
+
+
+    @GetMapping("/reg")
+    public Boolean register() {
+        return true;
+    }
 }

@@ -1,9 +1,12 @@
 package team.agile.campusnews.app.dao;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import team.agile.campusnews.app.model.News;
 
 import java.util.List;
 
+@Repository
 public interface NewsMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,7 +20,9 @@ public interface NewsMapper {
 
     int updateByPrimaryKey(News record);
 
-    List<News> selectBySchoolOsID(Integer id);
+    List<News> selectBySchoolOsID(Integer schoolOsID);
 
-    List<News> selectByUserId(Integer id);
+    List<News> selectByUserId(Integer userId);
+
+    List<News> selectByUserAll(@Param("userId")Integer userId,@Param("sIds") List<Integer> schoolOsId);
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.agile.campusnews.app.model.News;
-import team.agile.campusnews.app.model.User;
 import team.agile.campusnews.app.service.NewsService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,7 @@ public class NewsController {
     private NewsService newsService;
 
     @GetMapping("/get")
-    public List<News> getNews(Principal user,, HttpServletRequest request) {
+    public List<News> getNews(Principal user,HttpServletRequest request) {
         String userName = user.getName();
         if (request.isUserInRole("学生")) {
             return newsService.getNews(userName);

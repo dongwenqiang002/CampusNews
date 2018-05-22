@@ -32,7 +32,6 @@ public class NewsService {
         User user = userMapper.selectByUserName(userName);
         //user.getRole()
         //该用户可以看到的新闻
-
         List<News> newsList = newsMapper.selectNewsOnAll();
 
         return null;

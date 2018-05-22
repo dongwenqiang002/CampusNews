@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.agile.campusnews.app.dao.UserStudentMapper">
+  <resultMap id="BaseResultMap" type="team.agile.campusnews.app.model.UserStudent">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="stu_code" jdbcType="VARCHAR" property="stuCode" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="school_time" jdbcType="DATE" property="schoolTime" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, stu_code, user_id, school_time, grade
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_student
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="team.agile.campusnews.app.model.UserStudent">
+    insert into user_student (id, stu_code, user_id, 
+      school_time, grade)
+    values (#{id,jdbcType=INTEGER}, #{stuCode,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{schoolTime,jdbcType=DATE}, #{grade,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.UserStudent">
+    insert into user_student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stuCode != null">
+        stu_code,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="schoolTime != null">
+        school_time,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stuCode != null">
+        #{stuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolTime != null">
+        #{schoolTime,jdbcType=DATE},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.app.model.UserStudent">
+    update user_student
+    <set>
+      <if test="stuCode != null">
+        stu_code = #{stuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolTime != null">
+        school_time = #{schoolTime,jdbcType=DATE},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.app.model.UserStudent">
+    update user_student
+    set stu_code = #{stuCode,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      school_time = #{schoolTime,jdbcType=DATE},
+      grade = #{grade,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

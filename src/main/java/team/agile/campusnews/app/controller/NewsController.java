@@ -29,10 +29,11 @@ public class NewsController {
     public List<News> getNews(Principal user,HttpServletRequest request) {
         String userName = user.getName();
         if (request.isUserInRole("学生")) {
-            return newsService.getNews(userName);
+           // return newsService.getNews(userName);
         }else{
             return null;
         }
+        return null;
     }
 
     @Autowired

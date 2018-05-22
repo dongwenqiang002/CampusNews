@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.agile.campusnews.app.dao.NewsDetailMapper">
+  <resultMap id="BaseResultMap" type="team.agile.campusnews.app.model.NewsDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="Importance" jdbcType="INTEGER" property="importance" />
+    <result column="deadline" jdbcType="DATE" property="deadline" />
+    <result column="importance_deadline" jdbcType="DATE" property="importanceDeadline" />
+    <result column="news_id" jdbcType="INTEGER" property="newsId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_name, Importance, deadline, importance_deadline, news_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from news_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from news_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="team.agile.campusnews.app.model.NewsDetail">
+    insert into news_detail (id, type_name, Importance, 
+      deadline, importance_deadline, news_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{importance,jdbcType=INTEGER}, 
+      #{deadline,jdbcType=DATE}, #{importanceDeadline,jdbcType=DATE}, #{newsId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.NewsDetail">
+    insert into news_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeName != null">
+        type_name,
+      </if>
+      <if test="importance != null">
+        Importance,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="importanceDeadline != null">
+        importance_deadline,
+      </if>
+      <if test="newsId != null">
+        news_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="importance != null">
+        #{importance,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=DATE},
+      </if>
+      <if test="importanceDeadline != null">
+        #{importanceDeadline,jdbcType=DATE},
+      </if>
+      <if test="newsId != null">
+        #{newsId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.app.model.NewsDetail">
+    update news_detail
+    <set>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="importance != null">
+        Importance = #{importance,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=DATE},
+      </if>
+      <if test="importanceDeadline != null">
+        importance_deadline = #{importanceDeadline,jdbcType=DATE},
+      </if>
+      <if test="newsId != null">
+        news_id = #{newsId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.app.model.NewsDetail">
+    update news_detail
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      Importance = #{importance,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=DATE},
+      importance_deadline = #{importanceDeadline,jdbcType=DATE},
+      news_id = #{newsId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v11.27 (32 bit)
+SQLyog Community v10.0 
 MySQL - 5.7.17-log : Database - campusnews
 *********************************************************************
 */
@@ -15,85 +15,6 @@ MySQL - 5.7.17-log : Database - campusnews
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`campusnews` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `campusnews`;
-
-/*Table structure for table `class` */
-
-DROP TABLE IF EXISTS `class`;
-
-CREATE TABLE `class` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `major_id` int(11) DEFAULT NULL COMMENT '所属专业ID',
-  `name` varchar(50) DEFAULT NULL COMMENT '班级名称',
-  `code` varchar(50) DEFAULT NULL COMMENT '班级编号',
-  `instructor` int(11) DEFAULT NULL COMMENT '导员',
-  PRIMARY KEY (`id`),
-  KEY `instructor` (`instructor`),
-  KEY `major_id` (`major_id`),
-  CONSTRAINT `class_ibfk_2` FOREIGN KEY (`instructor`) REFERENCES `user` (`id`),
-  CONSTRAINT `class_ibfk_3` FOREIGN KEY (`major_id`) REFERENCES `major` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-/*Data for the table `class` */
-
-/*Table structure for table `college` */
-
-DROP TABLE IF EXISTS `college`;
-
-CREATE TABLE `college` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL COMMENT '学院名称',
-  `dean` int(11) DEFAULT NULL COMMENT '院长',
-  PRIMARY KEY (`id`),
-  KEY `dean` (`dean`),
-  CONSTRAINT `college_ibfk_1` FOREIGN KEY (`dean`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-/*Data for the table `college` */
-
-insert  into `college`(`id`,`name`,`dean`) values (1,'信息学院',1);
-
-/*Table structure for table `major` */
-
-DROP TABLE IF EXISTS `major`;
-
-CREATE TABLE `major` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL COMMENT '专业名称',
-  `college_id` int(11) DEFAULT NULL COMMENT '专业所属学院',
-  PRIMARY KEY (`id`),
-  KEY `college_id` (`college_id`),
-  CONSTRAINT `major_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-/*Data for the table `major` */
-
-insert  into `major`(`id`,`name`,`college_id`) values (1,'软件工程',1);
-
-/*Table structure for table `new_publish` */
-
-DROP TABLE IF EXISTS `new_publish`;
-
-CREATE TABLE `new_publish` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `new_id` int(11) NOT NULL COMMENT '新闻ID',
-  `user_id` int(11) DEFAULT NULL COMMENT '指定所要给的个人',
-  `class_id` int(11) DEFAULT NULL COMMENT '指定班级',
-  `college_id` int(11) DEFAULT NULL COMMENT '指定学院',
-  `all` tinyint(1) DEFAULT NULL COMMENT '指定是否所有人',
-  PRIMARY KEY (`id`),
-  KEY `new_id` (`new_id`),
-  KEY `user_id` (`user_id`),
-  KEY `college_id` (`college_id`),
-  KEY `class_id` (`class_id`),
-  CONSTRAINT `new_publish_ibfk_1` FOREIGN KEY (`new_id`) REFERENCES `news` (`id`),
-  CONSTRAINT `new_publish_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `new_publish_ibfk_3` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`),
-  CONSTRAINT `new_publish_ibfk_4` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
-/*Data for the table `new_publish` */
-
-insert  into `new_publish`(`id`,`new_id`,`user_id`,`class_id`,`college_id`,`all`) values (1,1,1,NULL,NULL,NULL),(2,1,2,NULL,NULL,NULL);
 
 /*Table structure for table `news` */
 
@@ -124,8 +45,8 @@ CREATE TABLE `news_detail` (
   `type_name` varchar(20) DEFAULT NULL COMMENT '新闻类型',
   `Importance` int(11) DEFAULT NULL COMMENT '新闻重要程度',
   `deadline` date DEFAULT NULL COMMENT '新闻过期时间',
-  `Importance_deadline` date DEFAULT NULL COMMENT '新闻重要性有效时间',
-  `news_id` int(11) DEFAULT NULL,
+  `importance_deadline` date DEFAULT NULL COMMENT '新闻重要性有效时间',
+  `news_id` int(11) DEFAULT NULL COMMENT '新闻ID',
   PRIMARY KEY (`id`),
   KEY `news_id` (`news_id`),
   CONSTRAINT `news_detail_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`)
@@ -133,7 +54,21 @@ CREATE TABLE `news_detail` (
 
 /*Data for the table `news_detail` */
 
-insert  into `news_detail`(`id`,`type_name`,`Importance`,`deadline`,`Importance_deadline`,`news_id`) values (1,'学习',1,'2018-05-24','2018-05-20',1);
+insert  into `news_detail`(`id`,`type_name`,`Importance`,`deadline`,`importance_deadline`,`news_id`) values (1,'学习',1,'2018-05-24','2018-05-20',1);
+
+/*Table structure for table `publish_news` */
+
+DROP TABLE IF EXISTS `publish_news`;
+
+CREATE TABLE `publish_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `news_id` int(11) NOT NULL COMMENT '所发布的新闻ID',
+  `schoolOS_id` int(11) DEFAULT NULL COMMENT '所要给组织传达的新闻',
+  `user_id` int(11) DEFAULT NULL COMMENT '所要给个人传达的新闻',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `publish_news` */
 
 /*Table structure for table `role` */
 
@@ -162,11 +97,11 @@ CREATE TABLE `schoolos` (
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`),
   CONSTRAINT `schoolos_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `schoolos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 /*Data for the table `schoolos` */
 
-insert  into `schoolos`(`id`,`name`,`parent_id`,`remark`,`code`) values (1,'西安财经学院',NULL,'学校',''),(2,'经济学院',1,'学校院系',NULL),(3,'管理学院',1,'学校院系',NULL),(4,'商学院',1,'学校院系',NULL),(5,'统计学院',1,'学校院系',NULL),(6,'信息学院',1,'学校院系',NULL),(7,'法学院',1,'学校院系',NULL),(8,'文学院',1,'学校院系',NULL),(9,'公共管理学院',1,'学校院系',NULL),(10,'外国语学院',1,'学校院系',NULL),(11,'继续教育学院',1,'学校院系',NULL),(12,'国际教育学院',1,'学校院系',NULL),(13,'马克思主义学院',1,'学校院系',NULL),(14,'体育教学部',1,'学校院系',NULL);
+insert  into `schoolos`(`id`,`name`,`parent_id`,`remark`,`code`) values (1,'西安财经学院',NULL,'学校',''),(2,'经济学院',1,'学校院系',NULL),(3,'管理学院',1,'学校院系',NULL),(4,'商学院',1,'学校院系',NULL),(5,'统计学院',1,'学校院系',NULL),(6,'信息学院',1,'学校院系',NULL),(7,'法学院',1,'学校院系',NULL),(8,'文学院',1,'学校院系',NULL),(9,'公共管理学院',1,'学校院系',NULL),(10,'外国语学院',1,'学校院系',NULL),(11,'继续教育学院',1,'学校院系',NULL),(12,'国际教育学院',1,'学校院系',NULL),(13,'马克思主义学院',1,'学校院系',NULL),(14,'体育教学部',1,'学校院系',NULL),(15,'软件工程',6,'专业/系',NULL),(16,'计算机科学与技术',6,'专业/系',NULL),(17,'会计',2,'专业/系',NULL),(18,'软件工程1401',6,'班级','1401'),(19,'软件工程1502',6,'班级','1502'),(20,'会计1401',17,'班级','1401'),(21,'会计1402',17,'班级','1402'),(22,'会计1602',17,'班级','1602'),(23,'软件工程1501',6,'班级','1501');
 
 /*Table structure for table `user` */
 
@@ -214,7 +149,11 @@ CREATE TABLE `user_schoolos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `schoolOS_is` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `schoolOS_is` (`schoolOS_is`),
+  CONSTRAINT `user_schoolos_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_schoolos_ibfk_2` FOREIGN KEY (`schoolOS_is`) REFERENCES `schoolos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_schoolos` */
@@ -226,6 +165,9 @@ DROP TABLE IF EXISTS `user_student`;
 CREATE TABLE `user_student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stu_code` varchar(100) DEFAULT NULL COMMENT '学号',
+  `user_id` int(11) DEFAULT NULL COMMENT '学生的用户ID',
+  `school_time` date DEFAULT NULL COMMENT '入学时间',
+  `grade` int(11) DEFAULT NULL COMMENT '所在的第几界',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

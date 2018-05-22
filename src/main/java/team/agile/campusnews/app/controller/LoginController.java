@@ -33,6 +33,19 @@ public class LoginController {
                 "        </form>";
     }
 
+
+    @RequestMapping("/wxlogin")
+    public String wxLogin(String code){
+        LOGGER.info("微信登录");
+        LOGGER.info("{}",code);
+
+        return "{\n" +
+                "  \"userInfo\":{\n" +
+                "    \"nickName\": \"dddwww\"\n" +
+                "  }\n" +
+                "}";
+    }
+
     /**
      * 登录失败URL
      * spring security 在登录失败时会跳转只当前url的POST

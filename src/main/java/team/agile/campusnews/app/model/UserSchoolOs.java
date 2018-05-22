@@ -1,11 +1,11 @@
 package team.agile.campusnews.app.model;
 
-public class UserRoleKey {
+public class UserSchoolOs {
     private Integer id;
 
     private Integer userId;
 
-    private Integer roleId;
+    private Integer schoolosIs;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class UserRoleKey {
         this.userId = userId;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public Integer getSchoolosIs() {
+        return schoolosIs;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setSchoolosIs(Integer schoolosIs) {
+        this.schoolosIs = schoolosIs;
     }
 }

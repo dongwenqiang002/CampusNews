@@ -2,16 +2,27 @@ package team.agile.campusnews.app.model;
 
 import java.util.Date;
 
-public class UserStudent {
+public class Student {
     private Integer id;
 
     private String stuCode;
 
-    private Integer userId;
+    //private Integer userId;
 
     private Date schoolTime;
 
     private Integer grade;
+
+    //源自userID查询到的
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
@@ -29,13 +40,7 @@ public class UserStudent {
         this.stuCode = stuCode == null ? null : stuCode.trim();
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Date getSchoolTime() {
         return schoolTime;

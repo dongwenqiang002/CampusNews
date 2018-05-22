@@ -9,15 +9,23 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="age" jdbcType="INTEGER" property="age" />
+    <collection property="role" select="selectRoleByUserId" column="id" javaType="list" />
   </resultMap>
   <sql id="Base_Column_List">
     id, username, code, name, phone, sex, age
   </sql>
+  <select id="selectRoleByUserId" parameterType="int" resultType="string">
+    SELECT role_name FROM role WHERE id IN (SELECT role_id FROM user_role WHERE user_id = #{id})
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" />
+    from user where username = #{username}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user

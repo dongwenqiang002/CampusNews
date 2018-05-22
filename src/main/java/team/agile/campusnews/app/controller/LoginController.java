@@ -33,7 +33,11 @@ public class LoginController {
                 "        </form>";
     }
 
-
+    /**
+     * 使用微信小程序前端发来的code向腾讯的微信服务器上获取信息
+     * @param code 前端发来的
+     * @return //TODO
+     * */
     @RequestMapping("/wxlogin")
     public String wxLogin(String code){
         LOGGER.info("微信登录");

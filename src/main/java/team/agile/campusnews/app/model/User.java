@@ -23,6 +23,16 @@ public class User implements UserDetails {
 
     private List<String> role;
 
+    private List<SchoolOs> schoolOs;
+
+    public List<SchoolOs> getSchoolOs() {
+        return schoolOs;
+    }
+
+    public void setSchoolOs(List<SchoolOs> schoolOs) {
+        this.schoolOs = schoolOs;
+    }
+
     public String getCode() {
         return code;
     }

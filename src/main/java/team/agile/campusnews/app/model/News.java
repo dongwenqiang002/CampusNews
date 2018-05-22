@@ -15,6 +15,11 @@ public class News {
 
     private String remark;
 
+    private Date endTime;
+
+    //通过查询获得
+    private String type;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +66,21 @@ public class News {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -26,14 +26,15 @@ public class NewsController {
     private NewsService newsService;
 
     @GetMapping("/get")
-    public List<News> getNews(Principal user,HttpServletRequest request) {
+    public List<News> getNews(Principal user, HttpServletRequest request) {
         String userName = user.getName();
+        //学生获取新闻
         if (request.isUserInRole("学生")) {
-           // return newsService.getNews(userName);
+            return newsService.getNews(userName);
         }else{
             return null;
         }
-        return null;
+      //  return null;
     }
 
     @Autowired

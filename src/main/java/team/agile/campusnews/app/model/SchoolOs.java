@@ -1,6 +1,6 @@
 package team.agile.campusnews.app.model;
 
-public class Organize {
+public class SchoolOs {
     private Integer id;
 
     private String name;

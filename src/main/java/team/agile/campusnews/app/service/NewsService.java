@@ -4,14 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.agile.campusnews.app.mapper.NewsMapper;
-import team.agile.campusnews.app.mapper.StuClassMapper;
-import team.agile.campusnews.app.mapper.UserMapper;
+import team.agile.campusnews.app.dao.NewsMapper;
+import team.agile.campusnews.app.dao.UserMapper;
 import team.agile.campusnews.app.model.News;
-import team.agile.campusnews.app.model.StuClass;
+import team.agile.campusnews.app.model.SchoolOs;
 import team.agile.campusnews.app.model.User;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,28 +21,28 @@ import java.util.List;
 public class NewsService {
     private static final Logger LOGGER = LoggerFactory.getLogger(NewsService.class);
 
-    private NewsMapper newsMapper;
     private UserMapper userMapper;
-    private StuClassMapper stuClassMapper;
+    private NewsMapper newsMapper;
 
     public List<News> getNews(String userName) {
-        //TODO 获取新闻
+        List<News> list =  new ArrayList<>(15);
         //获取用户实体
         User user = userMapper.selectByUserName(userName);
         //user.getRole()
         //该用户可以看到的新闻
-        List<News> newsList = newsMapper.selectNewsOnAll();
+        List<SchoolOs> schoolOs = user.getSchoolOs();
+        //通过用户所属组织获取 用户可以接受的组织新闻;
+        schoolOs.forEach(v-> list.addAll(newsMapper.selectBySchoolOsID(v.getId())));
+        list.addAll(newsMapper.selectByUserId(user.getId()));
 
-        return null;
+        return list;
     }
 
 
-
-
     @Autowired
-    public NewsService(NewsMapper newsMapper,UserMapper userMapper,StuClassMapper stuClassMapper) {
-        this.newsMapper = newsMapper;
+    public NewsService(UserMapper userMapper,NewsMapper newsMapper) {
         this.userMapper = userMapper;
-        this.stuClassMapper = stuClassMapper;
+        this.newsMapper = newsMapper;
+        /*this.stuClassMapper = stuClassMapper;*/
     }
 }

@@ -57,7 +57,13 @@ public class NewsService {
 
 
     }
-
+    /**
+     * @return 学校大事件
+     * @exception null
+     * */
+    public List<News> getNews(){
+        return newsMapper.selectBySchoolOsID(1);
+    }
 
     @Autowired
     public NewsService(UserMapper userMapper, NewsMapper newsMapper, SchoolOsMapper schoolOsMapper) {

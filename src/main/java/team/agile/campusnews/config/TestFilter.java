@@ -29,7 +29,6 @@ public class TestFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Content-Type","text/html;charset=UTF-8" );
         filterChain.doFilter(servletRequest,response);
     }
 

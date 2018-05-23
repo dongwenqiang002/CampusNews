@@ -28,6 +28,7 @@ public class NewsController {
     @GetMapping("/get")
     public List<News> getNews(Principal user, HttpServletRequest request) {
         String userName = user.getName();
+
         //学生获取新闻
         if (request.isUserInRole("学生")) {
             return newsService.getNews(userName);

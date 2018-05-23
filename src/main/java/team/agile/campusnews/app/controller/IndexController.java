@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.agile.campusnews.app.dao.SchoolOsMapper;
 import team.agile.campusnews.app.dao.UserMapper;
+import team.agile.campusnews.app.model.News;
 import team.agile.campusnews.app.model.SchoolOs;
 import team.agile.campusnews.app.model.User;
+import team.agile.campusnews.app.service.NewsService;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 测试
@@ -19,17 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class IndexController {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+
     @Autowired
-    SchoolOsMapper schoolOsMapper;
-    @Autowired
-    UserMapper userMapper;
+    private NewsService newsService;
 
     @GetMapping("/")
-    public User index(HttpServletResponse response){
-        //return schoolOsMapper.selectByPrimaryKey(20);
-        //cn.binarywang.wx.miniapp.api.WxMaUserService
-        return userMapper.selectByUserName("dwq");
-        //return "index";
+    public List<News> index(HttpServletResponse response){
+
+        return  newsService.getNews();
     }
 
     @PostMapping("/jj")

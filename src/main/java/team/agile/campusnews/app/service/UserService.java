@@ -55,7 +55,6 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-
     public boolean addUser(User user) {
         if (user == null) {
             return false;
@@ -105,4 +104,6 @@ public class UserService implements UserDetailsService {
         }
         // return false;
     }
+
+
 }

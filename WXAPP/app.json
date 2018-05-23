@@ -5,8 +5,7 @@
     "pages/component/index",
     "pages/i/index",
     "pages/logs/logs",
-    "pages/reg/reg",
-    "pages/reg/authorized"
+    "pages/reg/reg"
   ],
   "window": {
     "backgroundTextStyle": "light",

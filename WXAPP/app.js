@@ -15,27 +15,22 @@ App({
         //获取code
         if (logRes.code) {
           console.log(logRes.code);
-          wx.getUserInfo({
-            withCredentials: true,
-            success: function (res) {
-              console.log({ encryptedData: res.encryptedData, iv: res.iv, code: logRes.code })
-              wx.request({
-                url: 'http://172.17.0.6:8080/login/wxlogin',
-                data: {
-                  code: logRes.code, encryptedData: res.encryptedData, iv: res.iv
-                },
-                success: function (res) {
-                  that.globalData.userInfo = res.data;  // .userInfo;
-                  typeof cb == "function" && cb(that.globalData.userInfo)
-                }
-              })
+          wx.request({
+            url: 'http://127.0.0.1:8080/login/wxlogin',
+            data: {
+              code: logRes.code
             },
-            fail: function(ee){
-              console.log(ee);
-              console.log("未授权登录")
-              wx.redirectTo({
-                url: "/pages/reg/authorized",
-              })
+            success: function (res) {
+              console.log(res.data)
+              if(res.data){
+                that.globalData.header.Cookie = 'JSESSIONID=' + res.data;
+                that.globalData.userInfo = { nickName:'董文强'};  // .userInfo;
+                typeof cb == "function" && cb(that.globalData.userInfo)
+              }else{
+                wx.redirectTo({
+                  url: '/pages/reg/reg',
+                })
+              }
             }
           })
         }
@@ -49,7 +44,7 @@ App({
       typeof cb == "function" && cb(this.globalData.userInfo)
     } else {
       //调用登录接口
-     that.userLogin();
+      that.userLogin();
     }
   },
   onShow: function () {
@@ -59,6 +54,7 @@ App({
     console.log('App Hide')
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    header: { Cookie: '' }
   }
 })

@@ -1,6 +1,9 @@
 package team.agile.campusnews.config;
 
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import me.chanjar.weixin.common.exception.WxErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +43,8 @@ public class UserVerificationConfig implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         LOGGER.info("有人登录");
-        String username = authentication.getName();
-        String password = (String) authentication.getCredentials();
+        String  username = authentication.getName();
+        //String password = (String) authentication.getCredentials();
         UserDetails userDetials;
 
         try {
@@ -56,7 +59,7 @@ public class UserVerificationConfig implements AuthenticationProvider {
 
         if (true) {
 
-            return new UsernamePasswordAuthenticationToken(userDetials, password, authorities);
+            return new UsernamePasswordAuthenticationToken(userDetials, null, authorities);
 
         } else {
             /*密码不正确*/

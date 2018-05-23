@@ -25,6 +25,8 @@ public class User implements UserDetails {
 
     private List<SchoolOs> schoolOs;
 
+
+
     public List<SchoolOs> getSchoolOs() {
         return schoolOs;
     }

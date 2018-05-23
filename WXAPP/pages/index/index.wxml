@@ -14,5 +14,6 @@
   </view>
 
   <template is="index_index_items_tmpl" data="{{...index_index_items_tmpl}}" />
+  <template is="index_index_items_news" data="{{...news_list}}"/>
 
 </view>

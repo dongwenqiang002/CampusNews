@@ -1,0 +1,6 @@
+<!--pages/reg/reg.wxml-->
+<view class="container">
+ <view>
+  <text>注册</text>
+ </view>
+</view>

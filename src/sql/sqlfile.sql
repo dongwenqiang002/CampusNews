@@ -1,5 +1,5 @@
 /*
-SQLyog Community v10.0 
+SQLyog Ultimate v11.27 (32 bit)
 MySQL - 5.7.17-log : Database - campusnews
 *********************************************************************
 */
@@ -27,34 +27,32 @@ CREATE TABLE `news` (
   `pubdate` datetime NOT NULL COMMENT '新闻发布时间',
   `author` int(11) NOT NULL COMMENT '作者',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `end_time` datetime NOT NULL COMMENT '新闻失效时间',
+  `type` int(11) DEFAULT NULL COMMENT '新闻类型',
   PRIMARY KEY (`id`),
   KEY `author` (`author`),
-  CONSTRAINT `news_ibfk_1` FOREIGN KEY (`author`) REFERENCES `user` (`id`)
+  KEY `type` (`type`),
+  CONSTRAINT `news_ibfk_1` FOREIGN KEY (`author`) REFERENCES `user` (`id`),
+  CONSTRAINT `news_ibfk_2` FOREIGN KEY (`type`) REFERENCES `news_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `news` */
 
-insert  into `news`(`id`,`context`,`title`,`pubdate`,`author`,`remark`) values (1,'毋庸置疑，Spring Boot在众多从事Java微服务开发的程序员群体中是一个很特别的存在。说它特别是因为它确实简化了基于Spring技术栈的应用/微服务开发过程，使得我们能够很快速地就搭建起一个应用的脚手架并在其上进行项目的开发，再也不用像以前那样使用大量的XML或是注解了，应用在这样的约定优于配置的前提下可以以最快的速度创建出来。','我眼中的Spring Boot','2018-05-17 13:28:50',1,'转载自CSDN');
+insert  into `news`(`id`,`context`,`title`,`pubdate`,`author`,`remark`,`end_time`,`type`) values (1,'毋庸置疑，Spring Boot在众多从事Java微服务开发的程序员群体中是一个很特别的存在。说它特别是因为它确实简化了基于Spring技术栈的应用/微服务开发过程，使得我们能够很快速地就搭建起一个应用的脚手架并在其上进行项目的开发，再也不用像以前那样使用大量的XML或是注解了，应用在这样的约定优于配置的前提下可以以最快的速度创建出来。','我眼中的Spring Boot','2018-05-17 13:28:50',1,'转载自CSDN','2018-05-25 17:04:58',3);
 
-/*Table structure for table `news_detail` */
+/*Table structure for table `news_type` */
 
-DROP TABLE IF EXISTS `news_detail`;
+DROP TABLE IF EXISTS `news_type`;
 
-CREATE TABLE `news_detail` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type_name` varchar(20) DEFAULT NULL COMMENT '新闻类型',
-  `Importance` int(11) DEFAULT NULL COMMENT '新闻重要程度',
-  `deadline` date DEFAULT NULL COMMENT '新闻过期时间',
-  `importance_deadline` date DEFAULT NULL COMMENT '新闻重要性有效时间',
-  `news_id` int(11) DEFAULT NULL COMMENT '新闻ID',
-  PRIMARY KEY (`id`),
-  KEY `news_id` (`news_id`),
-  CONSTRAINT `news_detail_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE `news_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `type_name` varchar(50) NOT NULL COMMENT '类型名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-/*Data for the table `news_detail` */
+/*Data for the table `news_type` */
 
-insert  into `news_detail`(`id`,`type_name`,`Importance`,`deadline`,`importance_deadline`,`news_id`) values (1,'学习',1,'2018-05-24','2018-05-20',1);
+insert  into `news_type`(`id`,`type_name`) values (1,'通知'),(2,'活动'),(3,'学习');
 
 /*Table structure for table `publish_news` */
 
@@ -65,10 +63,18 @@ CREATE TABLE `publish_news` (
   `news_id` int(11) NOT NULL COMMENT '所发布的新闻ID',
   `schoolOS_id` int(11) DEFAULT NULL COMMENT '所要给组织传达的新闻',
   `user_id` int(11) DEFAULT NULL COMMENT '所要给个人传达的新闻',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `news_id` (`news_id`),
+  KEY `schoolOS_id` (`schoolOS_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `publish_news_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`),
+  CONSTRAINT `publish_news_ibfk_2` FOREIGN KEY (`schoolOS_id`) REFERENCES `schoolos` (`id`),
+  CONSTRAINT `publish_news_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `publish_news` */
+
+insert  into `publish_news`(`id`,`news_id`,`schoolOS_id`,`user_id`) values (1,1,1,1),(2,1,6,NULL);
 
 /*Table structure for table `role` */
 
@@ -109,7 +115,7 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) NOT NULL COMMENT '用户名(应该和微信一致)',
+  `username` varchar(266) NOT NULL COMMENT '用户名(应该和微信一致)',
   `code` varchar(50) DEFAULT NULL COMMENT '用户编号(应该是学号)',
   `name` varchar(10) DEFAULT NULL COMMENT '用户真实姓名',
   `phone` varchar(20) DEFAULT NULL COMMENT '电话',
@@ -120,7 +126,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`) values (1,'dwq','2211789','董文强','18892061129','男',22),(2,'sj','2211454','石娟','18829503014','女',21);
+insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`) values (1,'oPpou5TrPtEdgfZIQaL_uuMj8rfk','2211789','董文强','18892061129','男',22),(2,'sj','2211454','石娟','18829503014','女',21);
 
 /*Table structure for table `user_role` */
 
@@ -135,11 +141,11 @@ CREATE TABLE `user_role` (
   KEY `role` (`role_id`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_role` */
 
-insert  into `user_role`(`id`,`user_id`,`role_id`) values (1,1,4),(2,2,1),(3,2,5);
+insert  into `user_role`(`id`,`user_id`,`role_id`) values (1,1,4),(4,1,1),(2,2,1),(3,2,5);
 
 /*Table structure for table `user_schoolos` */
 
@@ -148,15 +154,17 @@ DROP TABLE IF EXISTS `user_schoolos`;
 CREATE TABLE `user_schoolos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
-  `schoolOS_is` int(11) DEFAULT NULL,
+  `schoolOS_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  KEY `schoolOS_is` (`schoolOS_is`),
+  KEY `schoolOS_is` (`schoolOS_id`),
   CONSTRAINT `user_schoolos_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `user_schoolos_ibfk_2` FOREIGN KEY (`schoolOS_is`) REFERENCES `schoolos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `user_schoolos_ibfk_2` FOREIGN KEY (`schoolOS_id`) REFERENCES `schoolos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_schoolos` */
+
+insert  into `user_schoolos`(`id`,`user_id`,`schoolOS_id`) values (1,1,18),(2,2,19),(3,1,15);
 
 /*Table structure for table `user_student` */
 

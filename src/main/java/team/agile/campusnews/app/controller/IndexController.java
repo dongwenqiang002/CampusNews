@@ -27,6 +27,7 @@ public class IndexController {
     @GetMapping("/")
     public User index(HttpServletResponse response){
         //return schoolOsMapper.selectByPrimaryKey(20);
+        //cn.binarywang.wx.miniapp.api.WxMaUserService
         return userMapper.selectByUserName("dwq");
         //return "index";
     }

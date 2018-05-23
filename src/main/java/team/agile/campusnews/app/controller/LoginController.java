@@ -1,11 +1,21 @@
 package team.agile.campusnews.app.controller;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.api.WxMaUserService;
+import cn.binarywang.wx.miniapp.api.impl.WxMaUserServiceImpl;
+import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
+import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
+import me.chanjar.weixin.common.exception.WxErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.xml.ws.Action;
 
 /**
  * @author 董文强
@@ -16,9 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class LoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
+    @Autowired
+    WxMaService wxMaUserService;
     /**
      * 没有登录
-     *
      * @return 没有登录的内容
      */
     @GetMapping("/NoLogin")
@@ -39,10 +50,29 @@ public class LoginController {
      * @return //TODO
      * */
     @RequestMapping("/wxlogin")
-    public String wxLogin(String code){
+    public String wxLogin(String encryptedData, String iv, String code){
         LOGGER.info("微信登录");
         LOGGER.info("{}",code);
+        try {
+            WxMaUserService s = wxMaUserService.getUserService();
+            WxMaJscode2SessionResult sess = wxMaUserService.getUserService().getSessionInfo(code);
+            WxMaUserInfo userInfo = s.getUserInfo(sess.getSessionKey(),encryptedData,iv);
+            //userInfo.
+            //s.
 
+            LOGGER.info("session: {}",sess.getSessionKey());
+            LOGGER.info("openid: {}",sess.getOpenid());
+            LOGGER.info("unionid: {}",sess.getUnionid());
+            LOGGER.info("userINFO");
+            LOGGER.info("getNickName: {}",userInfo.getNickName());
+            LOGGER.info("getUnionId: {}",userInfo.getUnionId());
+            LOGGER.info("getCity: {}",userInfo.getCity());
+            WxMaPhoneNumberInfo iphone = wxMaUserService.getUserService().getPhoneNoInfo(sess.getSessionKey(),encryptedData,iv);
+
+            LOGGER.info("电话号码: {}", iphone.getPurePhoneNumber());
+        } catch (WxErrorException e) {
+            e.printStackTrace();
+        }
         return "{\n" +
                 "  \"userInfo\":{\n" +
                 "    \"nickName\": \"dddwww\"\n" +

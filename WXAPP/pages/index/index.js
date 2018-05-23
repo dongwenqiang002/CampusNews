@@ -61,6 +61,10 @@ Page({
       url: '../logs/logs'
     })
   },
+  swiperchange: function(){
+    
+  }
+  ,
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
@@ -78,13 +82,17 @@ Page({
         })
       }
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+      app.getUserInfo(function (userInfo) {
+        //更新数据
+        console.log("-------------------")
+        console.log(userInfo)
+        if(userInfo){
+          that.setData({
+            userInfo: userInfo
+          })
+        }else{
+          wx.redirectTo({
+            url: '/reg',
           })
         }
       })

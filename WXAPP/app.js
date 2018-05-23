@@ -6,37 +6,50 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+
   },
+  userLogin: function () {
+    var that = this;
+    wx.login({
+      success: function (logRes) {
+        //获取code
+        if (logRes.code) {
+          console.log(logRes.code);
+          wx.getUserInfo({
+            withCredentials: true,
+            success: function (res) {
+              console.log({ encryptedData: res.encryptedData, iv: res.iv, code: logRes.code })
+              wx.request({
+                url: 'http://172.17.0.6:8080/login/wxlogin',
+                data: {
+                  code: logRes.code, encryptedData: res.encryptedData, iv: res.iv
+                },
+                success: function (res) {
+                  that.globalData.userInfo = res.data;  // .userInfo;
+                  typeof cb == "function" && cb(that.globalData.userInfo)
+                }
+              })
+            },
+            fail: function(ee){
+              console.log(ee);
+              console.log("未授权登录")
+              wx.redirectTo({
+                url: "/pages/reg/authorized",
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+
   getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
     } else {
       //调用登录接口
-      wx.login({
-        success: function (logRes) {
-          if (logRes.code) {
-            wx.request({
-              url: 'http://127.0.0.1:8080/login/wxlogin',
-              data: {
-                code: logRes.code
-              },
-              success: function (res) {
-                that.globalData.userInfo = res.data.userInfo;
-                typeof cb == "function" && cb(that.globalData.userInfo)
-              }
-            })
-          }else{
-            console.log("登录失败!");
-          }
-         /* wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
-            }
-          })*/
-        }
-      })
+     that.userLogin();
     }
   },
   onShow: function () {

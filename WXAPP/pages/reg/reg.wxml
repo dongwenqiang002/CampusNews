@@ -36,7 +36,9 @@
         </picker>
       </view>
       <view class="widgets__item">
-        <picker mode="multiSelector" bindchange="bindViewEvent" range="{{schoolOSS}}" range-key="name" data-method="bindSelect" data-name="region" value="{{region}}" custom-item="{{customItem}}">
+        <picker mode="multiSelector"  range="{{schoolOSS}}" range-key="name" 
+        value="{{schoolId}}" bindcolumnchange="onChangSchool"
+        data-name="region" value="{{region}}" bindchange="onChangSchool"  custom-item="{{customItem}}">
           <view class="picker">
             所在班级:{{region[0]}}，{{region[1]}}，{{region[2]}}
           </view>

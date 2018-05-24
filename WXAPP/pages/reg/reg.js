@@ -5,9 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    schoolOSS:
-    []
-    ,
+    schoolOSS:[],
+    schoolId:[0,0,0,],
     region: ['河北', '沧州', '河间'],
     userInfo: {},
     hasUserInfo: false,
@@ -23,6 +22,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  onChangSchool:function(v){
+  //  event.detail = {
+     // column: column, value: value
+
+    console.log(v);
+    console.log(this.data.schoolId)
+  },
   onLoad: function (options) {
     let that = this;
     wx.request({

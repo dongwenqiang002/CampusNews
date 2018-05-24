@@ -20,4 +20,6 @@ public interface SchoolOsMapper {
     int updateByPrimaryKey(SchoolOs record);
 
     List<SchoolOs> selectByUserId(Integer userId);
+
+    List<SchoolOs> selectByParentId(Integer id);
 }

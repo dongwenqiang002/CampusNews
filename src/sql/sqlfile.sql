@@ -115,18 +115,19 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(266) NOT NULL COMMENT '用户名(应该和微信一致)',
+  `username` varchar(266) NOT NULL COMMENT '用户名(就是微信的OPENID)唯一',
   `code` varchar(50) DEFAULT NULL COMMENT '用户编号(应该是学号)',
   `name` varchar(10) DEFAULT NULL COMMENT '用户真实姓名',
   `phone` varchar(20) DEFAULT NULL COMMENT '电话',
   `sex` varchar(5) DEFAULT NULL COMMENT '性别',
   `age` int(10) unsigned DEFAULT NULL COMMENT '年龄',
+  `wxName` varchar(50) DEFAULT NULL COMMENT '微信名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`) values (1,'oPpou5TrPtEdgfZIQaL_uuMj8rfk','2211789','董文强','18892061129','男',22),(2,'sj','2211454','石娟','18829503014','女',21);
+insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`,`wxName`) values (1,'111','2211789','董文强','18892061129','男',22,NULL),(2,'oPpou5TrPtEdgfZIQaL_uuMj8rfk11','2211454','石娟','18829503014','女',21,NULL);
 
 /*Table structure for table `user_role` */
 

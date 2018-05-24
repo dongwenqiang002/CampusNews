@@ -1,6 +1,56 @@
-<!--pages/reg/reg.wxml-->
-<view class="container">
- <view>
-  <text>注册</text>
- </view>
+<view class="index">
+  <view class="head">
+    <view class="title">注册</view>
+  </view>
+
+  <view class="body">
+    <view class="widgets">
+      <view class="widgets__item">
+        <view class="widgets__info " bindtap="widgetsToggle">
+          <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取用户信息 </button>
+          <block wx:else>
+            <!--<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>-->
+            <text style='color:#00ff00'>获取成功</text>
+          </block>
+        </view>
+      </view>
+      <view class="widgets__item">
+        <view class="widgets__info " bindtap="widgetsToggle">
+          <text class="widgets__info-name">学号：</text>
+          <input/>
+        </view>
+      </view>
+      <view class="widgets__item">
+        <view class="widgets__info " bindtap="widgetsToggle">
+          <text class="widgets__info-name">班级：</text>
+          <input/>
+        </view>
+      </view>
+      <view class="widgets__item">
+        <picker mode="date" value="{{time}}" start="09:00" end="17:30" bindchange="changeTime">
+          <view class="widgets__info " bindtap="widgetsToggle">
+            <view class="tui-picker-detail">
+              入学时间： {{time}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="widgets__item">
+        <picker mode="multiSelector" bindchange="bindViewEvent" range="{{schoolOSS}}" range-key="name" data-method="bindSelect" data-name="region" value="{{region}}" custom-item="{{customItem}}">
+          <view class="picker">
+            所在班级:{{region[0]}}，{{region[1]}}，{{region[2]}}
+          </view>
+        </picker>
+      </view>
+
+
+
+      <view class="widgets__item">
+        <view class="widgets__info " bindtap="widgetsToggle">
+          <button>确认提交</button>
+        </view>
+      </view>
+
+    </view>
+  </view>
 </view>

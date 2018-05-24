@@ -8,13 +8,13 @@ Page({
     // 轮播
     index_index_scroll_tmpl: {
       images: [
-        'http://127.0.0.1:8080/file/photo/34088f0a883f4b85ae573a822ff68381.jpg',
-        'http://127.0.0.1:8080/file/photo/34088f0a883f4b85ae573a822ff68381.jpg',
-        'http://127.0.0.1:8080/file/photo/34088f0a883f4b85ae573a822ff68381.jpg',
-        'http://127.0.0.1:8080/file/photo/34088f0a883f4b85ae573a822ff68381.jpg',
-        'http://127.0.0.1:8080/file/photo/34088f0a883f4b85ae573a822ff68381.jpg',
-        'http://127.0.0.1:8080/file/photo/34088f0a883f4b85ae573a822ff68381.jpg',
-        'http://127.0.0.1:8080/file/photo/34088f0a883f4b85ae573a822ff68381.jpg'
+        'http://127.0.0.1:8080/file/image/timg.jpg',
+        'http://127.0.0.1:8080/file/image/tushuguan.jpg',
+        'http://127.0.0.1:8080/file/image/ufe.jpg',
+        'http://127.0.0.1:8080/file/image/xiaoxunbei.jpg',
+        'http://127.0.0.1:8080/file/image/huahua.jpg',
+        'http://127.0.0.1:8080/file/image/xingzhenglou.jpg',
+        'http://127.0.0.1:8080/file/image/erjiao.jpg',
       ],
       indicatorDots: true,
       vertical: false,
@@ -22,7 +22,21 @@ Page({
       interval: 3000,
       duration: 1200
     },
-    
+    // 轮播图下面的分类
+    index_index_navs_tmpl: {
+      navs: [
+        {
+          image: 'http://127.0.0.1:8080/file/image/2.jpg',
+          text: '提醒'
+        }, {
+          image: 'http://127.0.0.1:8080/file/image/3.jpg',
+          text: '公告'
+        }, {
+          image: 'http://127.0.0.1:8080/file/image/1.jpg',
+          text: '活动'
+        }
+      ]
+    },
    //新闻列表内容
     news_list: {
       items: [{
@@ -49,6 +63,9 @@ Page({
   }
   ,
   onLoad: function () {
+    wx.redirectTo({
+      url: '/pages/reg/reg',
+    })
     let that = this;
     wx.request({
       url: 'http://127.0.0.1:8080',

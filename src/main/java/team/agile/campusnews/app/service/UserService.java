@@ -105,5 +105,11 @@ public class UserService implements UserDetailsService {
         // return false;
     }
 
-
+    /**
+     * 注册
+     */
+    public Boolean regUser(User user, String classId, String 学生) {
+        //TODO
+        return false;
+    }
 }

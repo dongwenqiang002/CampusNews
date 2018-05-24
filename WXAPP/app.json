@@ -31,13 +31,7 @@
         "pagePath": "pages/list/index",
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
-        "text": "分类"
-      },
-      {
-        "pagePath": "pages/component/index",
-        "iconPath": "image/icon_API.png",
-        "selectedIconPath": "image/icon_API_HL.png",
-        "text": "购物车"
+        "text": "列表"
       },
       {
         "pagePath": "pages/i/index",

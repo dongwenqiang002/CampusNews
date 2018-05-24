@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import team.agile.campusnews.app.model.User;
 import team.agile.campusnews.app.service.UserService;
 
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ import javax.xml.ws.Action;
 public class LoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
     @Autowired
-    private  WxMaService wxMaUserService;
+    private  WxMaService wxMaService;
     @Autowired
     private UserService userService;
     /**
@@ -59,8 +60,8 @@ public class LoginController {
         if(code == null|| code.isEmpty())return null;
         LOGGER.info("{}",code);
         try {
-            WxMaUserService s = wxMaUserService.getUserService();
-            WxMaJscode2SessionResult sess = wxMaUserService.getUserService().getSessionInfo(code);
+            WxMaUserService s = wxMaService.getUserService();
+            WxMaJscode2SessionResult sess = wxMaService.getUserService().getSessionInfo(code);
             LOGGER.info("session: {}",sess.getSessionKey());
             LOGGER.info("openid: {}",sess.getOpenid());
             userService.loadUserByUsername(sess.getOpenid());
@@ -99,8 +100,5 @@ public class LoginController {
     }
 
 
-    @GetMapping("/reg")
-    public Boolean register() {
-        return true;
-    }
+
 }

@@ -23,12 +23,12 @@ public class FileController {
     private FileServices fileService;
 
 
-    @GetMapping("/photo/{name}.{type}")
+    @GetMapping("/image/{name}.{type}")
     public void getFile(@PathVariable("name") String name, @PathVariable("type") String type,
                         HttpServletResponse response) {
         LOGGER.info("{}",name);
         //将图片输出给浏览器
-       fileService.getFileToResponse("/photo/"+name+"."+type,type,response);
+       fileService.getFileToResponse("/image/"+name+"."+type,type,response);
     }
 
     //下载

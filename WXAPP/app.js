@@ -6,7 +6,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+   
   },
   userLogin: function () {
     var that = this;
@@ -49,6 +49,8 @@ App({
   },
   onShow: function () {
     console.log('App Show')
+   // this.userLogin();
+    
   },
   onHide: function () {
     console.log('App Hide')

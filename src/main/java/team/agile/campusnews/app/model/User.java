@@ -25,7 +25,26 @@ public class User implements UserDetails {
 
     private List<SchoolOs> schoolOs;
 
+    private String wxName;
 
+    //微信头像URL
+    private  String avatarUrl;
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getWxName() {
+        return wxName;
+    }
+
+    public void setWxName(String wxName) {
+        this.wxName = wxName;
+    }
 
     public List<SchoolOs> getSchoolOs() {
         return schoolOs;
@@ -93,8 +112,8 @@ public class User implements UserDetails {
     }
 
     public List<String> getRole() {
-        if(role == null || role.isEmpty()){
-            return Collections.singletonList("无权限");
+        if(role == null ){
+            this.role = new ArrayList<>();
         }
         return this.role;
     }
@@ -102,7 +121,6 @@ public class User implements UserDetails {
     public void setRole(List<String> role) {
         this.role = role;
     }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> ro = new ArrayList<>();

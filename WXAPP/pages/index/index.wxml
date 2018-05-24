@@ -6,6 +6,9 @@
     <template is="index_index_scroll_tmpl" data="{{...index_index_scroll_tmpl}}" />
   </view>
 
+ <view class="section index-nav">
+       <template is="index_index_navs_tmpl" data="{{...index_index_navs_tmpl}}"/>
+    </view>
 
   <view class="text">
     <view class="line_y"></view>

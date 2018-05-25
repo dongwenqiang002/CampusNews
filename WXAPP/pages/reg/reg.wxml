@@ -5,27 +5,30 @@
 
   <view class="body">
     <view class="widgets">
-      <view class="widgets__item">
-        <view class="widgets__info " bindtap="widgetsToggle">
-          <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取用户信息 </button>
-          <block wx:else>
-            <!--<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>-->
-            <text style='color:#00ff00'>获取成功</text>
-          </block>
-        </view>
-      </view>
+
+
       <view class="widgets__item">
         <view class="widgets__info " bindtap="widgetsToggle">
           <text class="widgets__info-name">学号：</text>
-          <input/>
+          <input name="studentCode" bindinput="studentCodeInput" />
         </view>
       </view>
+
       <view class="widgets__item">
         <view class="widgets__info " bindtap="widgetsToggle">
-          <text class="widgets__info-name">班级：</text>
-          <input/>
+          <text class="widgets__info-name">姓名：</text>
+          <input name="name" bindinput="nameInput" />
         </view>
       </view>
+
+      <view class="widgets__item">
+        <picker mode="multiSelector" range="{{schoolOSS}}" range-key="name" bindcolumnchange="onChangSchool" value="{{stuClass}}" bindchange="onChangSchoolOK" custom-item="{{customItem}}">
+          <view class="widgets__info " bindtap="widgetsToggle">
+            <text class="widgets__info-name">班级：{{stuClass.name}}</text>
+          </view>
+        </picker>
+      </view>
+
       <view class="widgets__item">
         <picker mode="date" value="{{time}}" start="09:00" end="17:30" bindchange="changeTime">
           <view class="widgets__info " bindtap="widgetsToggle">
@@ -35,24 +38,18 @@
           </view>
         </picker>
       </view>
+
+
+
+      <!--bindtap="submitff" -->
       <view class="widgets__item">
-        <picker mode="multiSelector"  range="{{schoolOSS}}" range-key="name" 
-        value="{{schoolId}}" bindcolumnchange="onChangSchool"
-        data-name="region" value="{{region}}" bindchange="onChangSchool"  custom-item="{{customItem}}">
-          <view class="picker">
-            所在班级:{{region[0]}}，{{region[1]}}，{{region[2]}}
-          </view>
-        </picker>
-      </view>
-
-
-
-      <view class="widgets__item">
-        <view class="widgets__info " bindtap="widgetsToggle">
-          <button>确认提交</button>
+        <view class="widgets__info ">
+          <button bindgetuserinfo="submitff" open-type="getUserInfo">确认提交</button>
         </view>
       </view>
-
     </view>
+
+
+
   </view>
 </view>

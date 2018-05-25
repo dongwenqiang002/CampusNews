@@ -35,30 +35,35 @@ public class RegController {
     private SchoolOsService schoolOsService;
 
     @PostMapping("/reg")
-    public Boolean register(String studentCode,String code,String iv,String encryptedData,String schoolTime,String classId) {
+    public Boolean register(String studentCode, String code, String iv, String encryptedData, String schoolTime, String classId) {
         try {
-            wxMaService.getUserService().getSessionInfo("a");
+            LOGGER.info("studentCode:{}", studentCode);
+            LOGGER.info("iv:{}", iv);
+            LOGGER.info("code:{}", code);
+            LOGGER.info("encryptedData:{}", encryptedData);
+            LOGGER.info("schoolTime:{}", schoolTime);
+            LOGGER.info("classId:{}", classId);
             WxMaJscode2SessionResult sess = wxMaService.getUserService().getSessionInfo(code);
             WxMaUserInfo userInfo = wxMaService.getUserService().getUserInfo(sess.getSessionKey(), encryptedData, iv);
-            userInfo.getAvatarUrl();
+
             User user = new User();
             user.setUsername(sess.getOpenid());
 
             user.setCode(studentCode);
             user.setWxName(userInfo.getNickName());
-            user.getRole().add("学生");
             user.setSex(userInfo.getGender());
-            userService.regUser(user,classId,"学生");
+            userService.regUser(user, classId, "学生",schoolTime);
         } catch (WxErrorException e) {
-            e.printStackTrace();
+           LOGGER.error(e.getError().getErrorMsg());
+            return false;
         }
         return true;
     }
 
     @GetMapping("/school")
-    public List<SchoolOs> getSchoolAll(String schhoID){
-        if(schhoID == null)schhoID = "1";
-        return schoolOsService.getSchhoByID(schhoID);
+    public List<SchoolOs> getSchoolAll(String schoolID) {
+        if (schoolID == null) schoolID = "1";
+        return schoolOsService.getSchhoByID(schoolID);
         //return
     }
 }

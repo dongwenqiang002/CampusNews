@@ -34,13 +34,18 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <insert id="regUserS" >
+    insert into user_schoolos (user_id, schoolOS_id) values(#{userId} ,#{schoolId})
+  </insert>
+  <insert id="regUserR" >
+    insert into user_role (user_id, role_id) values (#{userId} ,#{roleId})
+  </insert>
+  <insert id="regUserStu" >
+    insert into user_student (stu_code, user_id, school_time) values (#{code},#{userId},#{schoolTime})
+  </insert>
   <insert id="insert" parameterType="team.agile.campusnews.app.model.User">
-    insert into user (id, username, code, 
-      name, phone, sex, age
-      )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
-      )
+    insert into user ( username, code,`name`, sex)
+    values ( #{username}, #{code},#{name}, , #{sex} )
   </insert>
   <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.User">
     insert into user
@@ -91,6 +96,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.app.model.User">
     update user
     <set>

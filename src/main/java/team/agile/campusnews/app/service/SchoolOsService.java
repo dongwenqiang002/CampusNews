@@ -22,7 +22,11 @@ public class SchoolOsService {
     public List<SchoolOs> getSchhoByID(String schhoID) {
         try {
             Integer id = Integer.parseInt(schhoID);
-            return schoolOsMapper.selectByParentId(id);
+            List<SchoolOs> schoolOsList = schoolOsMapper.selectByParentId(id);
+            if(schoolOsList == null ||schoolOsList.isEmpty()||schoolOsList.size()==0){
+                return null;
+            }
+            return schoolOsList;
         }catch (Exception e){
             LOGGER.error(e.toString());
             return null;

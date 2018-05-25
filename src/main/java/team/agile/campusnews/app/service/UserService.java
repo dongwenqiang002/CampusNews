@@ -106,10 +106,13 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * 注册
+     * 注册 TODO
      */
-    public Boolean regUser(User user, String classId, String 学生) {
-        //TODO
+    public Boolean regUser(User user,  String classId,String role, String schoolTime) {
+        Integer id  = userMapper.insert(user);
+        userMapper.regUserR(id,role);
+        userMapper.regUserS(id,classId);
+        userMapper.regUserStu(user.getCode(),id,schoolTime)
         return false;
     }
 }

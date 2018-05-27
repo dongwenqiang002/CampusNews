@@ -37,7 +37,20 @@ public class NewsController {
         }
       //  return null;
     }
+    @GetMapping("/addNews")
+    public List<News> addNews(Principal user, HttpServletRequest request,String context) {
+        String userName = user.getName();
+        News news = new News();
 
+        //news.setAuthor();
+        //学生获取新闻
+        if (request.isUserInRole("学生")) {
+            return newsService.getNews(userName);
+        }else{
+            return null;
+        }
+        //  return null;
+    }
     @Autowired
     public NewsController(NewsService newsService) {
         this.newsService = newsService;

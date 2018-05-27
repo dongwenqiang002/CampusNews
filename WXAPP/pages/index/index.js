@@ -63,9 +63,9 @@ Page({
   }
   ,
   onLoad: function () {
-    wx.redirectTo({
+  /*  wx.redirectTo({
       url: '/pages/reg/reg',
-    })
+    })*/
     let that = this;
     wx.request({
       url: 'http://127.0.0.1:8080',

@@ -161,6 +161,25 @@ Page({
             },
             success: function (res) {
               console.log(res);
+              if(res.data){
+                that.globalData.header.Cookie = 'JSESSIONID=' + res.data;
+              }else{
+                wx.showToast({
+                  title: '注册信息有误',
+                  icon: 'none',
+                  duration: 2000
+                })
+                return;
+              }
+            },
+            fail: function(ree){
+              console.log(ree);
+              wx.showToast({
+                title: '注册信息有误',
+                icon: 'none',
+                duration: 2000
+              })
+              return;
             }
           });
 

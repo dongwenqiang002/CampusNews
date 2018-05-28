@@ -72,15 +72,13 @@ Page({
 
   },
   //
-  toNewsDetail: function(){
+  toNewsDetail: function(e){
     wx.navigateTo({
-      url: "/pages/newsDetail/index?id=1",
+      url: "/pages/newsDetail/index?id=" + e.currentTarget.dataset.id
     })
   },
   onLoad: function () {
-    wx.redirectTo({
-      url: '/pages/reg/reg',
-    })
+    app.userLogin();
     let that = this;
     wx.request({
       url: 'http://127.0.0.1:8080',

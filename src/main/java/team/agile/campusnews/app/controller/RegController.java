@@ -16,6 +16,8 @@ import team.agile.campusnews.app.model.User;
 import team.agile.campusnews.app.service.SchoolOsService;
 import team.agile.campusnews.app.service.UserService;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class RegController {
     private SchoolOsService schoolOsService;
 
     @PostMapping("/reg")
-    public Boolean register(String studentCode, String code, String iv, String encryptedData, String schoolTime, String classId) {
+    public String register(String studentCode, String code, String iv, String encryptedData, String schoolTime, String classId, HttpServletRequest request) {
         try {
             LOGGER.info("studentCode:{}", studentCode);
             LOGGER.info("iv:{}", iv);
@@ -55,14 +57,20 @@ public class RegController {
             user.setSex(userInfo.getGender());
 
             userService.regUser(user, classId, "学生",schoolTime);
+            request.login(user.getUsername(),null);
+            return request.getSession().getId();
         } catch (WxErrorException e) {
            LOGGER.error(e.getError().getErrorMsg());
-            return false;
+            return null;
         } catch (ParseException e) {
             LOGGER.error(e.getLocalizedMessage());
-            return false;
+            return null;
+        } catch (ServletException e) {
+            e.printStackTrace();
+            return null;
         }
-        return true;
+
+       // return true;
     }
 
     @GetMapping("/school")

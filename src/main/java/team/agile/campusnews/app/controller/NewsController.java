@@ -37,7 +37,11 @@ public class NewsController {
         }
         //  return null;
     }
-
+    @GetMapping("/detail")
+    public News getNews(Integer newsId, HttpServletRequest request) {
+       return  newsService.getNews(newsId);
+        //  return null;
+    }
     @GetMapping("/addNews")
     public List<News> addNews(Principal user, HttpServletRequest request, String context) {
         String userName = user.getName();

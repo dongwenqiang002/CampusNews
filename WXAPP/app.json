@@ -3,7 +3,6 @@
     "pages/index/index",
     "pages/list/index",
     "pages/component/index",
-    "pages/i/index",
     "pages/logs/logs",
     "pages/reg/reg",
     "pages/newsDetail/index"

@@ -1,4 +1,5 @@
-// pages/newsDetail/index.js
+var header = getApp().globalData.header;
+
 Page({
 
   /**
@@ -21,7 +22,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      options.id
+      options.id;
+      console.log(options.id)
+      let that = this;
+      wx.request({
+        url: 'http://127.0.0.1:8080/news/detail',
+        header: header,
+        data: { newsId: options.id},
+        success: function (res) {
+          that.setData({
+            "news": res.data
+          });
+        },
+        fail: function (r) {  
+        }
+      });
   },
 
   /**

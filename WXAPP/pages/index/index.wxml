@@ -13,7 +13,7 @@
 
   </view>
 
-  <view class="card short-card" wx:for="{{news_list.items}}" wx:for-index="itemIndex" bindtap='toNewsDetail'>
+  <view class="card short-card" wx:key="itemIndex" wx:for="{{news_list.items}}" wx:for-index="itemIndex" data-id="{{item.id}}" bindtap='toNewsDetail'>
     <view>
       <text class="title">{{ item.title }}</text>
     </view>

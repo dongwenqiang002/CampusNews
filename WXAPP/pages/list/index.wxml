@@ -4,7 +4,7 @@
   <view class="section index-nav">
     <template is="index_index_navs_tmpl" data="{{...index_index_navs_tmpl}}" />
   </view>
-  <view class="card list-card" wx:for="{{news_list.items}}" wx:for-index="itemIndex" bindtap='totime' id="list">
+  <view class="card list-card" wx:for="{{news_list.items}}" wx:key="itemIndex" wx:for-index="itemIndex" bindtap='totime' id="list" bindtap='toNewsDetail' data-id="{{item.id}}">
     <view>
       <text class="title">{{ item.title }}</text>
     </view>

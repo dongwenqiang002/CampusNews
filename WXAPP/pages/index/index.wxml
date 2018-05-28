@@ -13,10 +13,14 @@
 
   </view>
 
-    <view class="card short-card" wx:for="{{news_list.items}}"                        wx:for-index="itemIndex" bindtap='toNewsDetail'>
-        <view><text class="title">{{ item.title }}</text></view>
-        <view><text class="tag">作者： {{ item.author }}, 发布时间： {{             item.pubdate }}</text></view>
+  <view class="card short-card" wx:for="{{news_list.items}}" wx:for-index="itemIndex" bindtap='toNewsDetail'>
+    <view>
+      <text class="title">{{ item.title }}</text>
     </view>
-
+    <view>
+      <text class="tag">作者： {{ item.author }}, 发布时间： {{item.pubdate }}</text>
+    </view>
+  </view>
+ 
 
 </view>

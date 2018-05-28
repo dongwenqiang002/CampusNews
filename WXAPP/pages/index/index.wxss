@@ -95,7 +95,7 @@ view.text text {
 }
 
 .card, #wordscard {
-    background: #0e61af;
+   background: #DCDCDC;
     margin: 20rpx 14px;
     padding: 20px 32rpx;
     border-radius: 2%;

@@ -38,7 +38,7 @@ Page({
     //
   //事件处理函数
   onLoad: function (options) {
-
+   
     this.title = options.type || '列表'
     console.log("访问新闻")
     wx.request({

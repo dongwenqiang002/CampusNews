@@ -25,7 +25,7 @@ import team.agile.campusnews.app.service.UserService;
 import java.util.Collection;
 
 /**
- * @author 董文强
+ * @author 队员
  * @Time 2018/3/13 16:55
  * 验证用户名与密码
  */

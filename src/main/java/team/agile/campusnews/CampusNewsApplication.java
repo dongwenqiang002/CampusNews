@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @MapperScan("team.agile.campusnews.app.dao")
-@EnableTransactionManagement //开启事务
+@EnableTransactionManagement(proxyTargetClass = true) //开启事务
 public class CampusNewsApplication {
 
     public static void main(String[] args) {

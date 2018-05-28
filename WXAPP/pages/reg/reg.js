@@ -45,7 +45,7 @@ Page({
     let sc = this.data.schoolOSS[v.detail.column][v.detail.value];
     if(sc == undefined)return;
     wx.request({
-      url: 'http://127.0.0.1:8080/reg/school',
+      url: 'http://192.168.43.47:8080/reg/school',
       data: { schoolID: sc.id},
       success: function (res) {
         if(res.data){
@@ -87,7 +87,7 @@ Page({
   onLoad: function (options) {
     let that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/reg/school',
+      url: 'http://192.168.43.47:8080/reg/school',
       success: function (res) {
         let scc = that.data.schoolOSS;
         console.log(res.data);
@@ -145,7 +145,7 @@ Page({
         if (logRes.code) {
           console.log(that.data.userInfo);
           wx.request({
-            url: 'http://127.0.0.1:8080/reg/reg',
+            url: 'http://192.168.43.47:8080/reg/reg',
             header:{
               'content-type': 'application/x-www-form-urlencoded'
             },

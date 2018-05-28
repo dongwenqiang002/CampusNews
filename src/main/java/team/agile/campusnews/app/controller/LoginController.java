@@ -35,15 +35,16 @@ public class LoginController {
      * @return 没有登录的内容
      */
     @GetMapping("/NoLogin")
-    public String noLogin() {
+    public boolean noLogin() {
         //TODO 没有登录
-        return "您没登录" +
+        return false;
+     /*   return "您没登录" +
                 "<h1>测试使用的POST登录</h1>" +
                 " <form action=\"/login\" method=\"post\">\n" +
                 "            <input name=\"username\"/>\n" +
                 "            <input name=\"password\"/>\n" +
                 "            <button type=\"submit\">提交</button>\n" +
-                "        </form>";
+                "        </form>";*/
     }
 
     /**

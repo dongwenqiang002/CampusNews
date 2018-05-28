@@ -6,9 +6,6 @@
     <template is="index_index_scroll_tmpl" data="{{...index_index_scroll_tmpl}}" />
   </view>
 
- <view class="section index-nav">
-       <template is="index_index_navs_tmpl" data="{{...index_index_navs_tmpl}}"/>
-    </view>
 
   <view class="text">
     <view class="line_y"></view>
@@ -16,7 +13,10 @@
 
   </view>
 
-  <template is="index_index_items_tmpl" data="{{...index_index_items_tmpl}}" />
-  <template is="index_index_items_news" data="{{...news_list}}"/>
+    <view class="card short-card" wx:for="{{news_list.items}}"                        wx:for-index="itemIndex" bindtap='toNewsDetail'>
+        <view><text class="title">{{ item.title }}</text></view>
+        <view><text class="tag">作者： {{ item.author }}, 发布时间： {{             item.pubdate }}</text></view>
+    </view>
+
 
 </view>

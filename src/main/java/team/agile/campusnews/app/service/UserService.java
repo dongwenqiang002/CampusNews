@@ -10,8 +10,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import team.agile.campusnews.app.dao.UserMapper;
 import team.agile.campusnews.app.model.User;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author 董文强
@@ -24,9 +29,17 @@ public class UserService implements UserDetailsService {
 
     private UserMapper userMapper;
 
+    private SimpleDateFormat dateFormat;
+
     @Autowired
-    public UserService(UserMapper userMapper) {
+    public UserService(UserMapper userMapper,SimpleDateFormat dateFormat) {
         this.userMapper = userMapper;
+        this.dateFormat = dateFormat;
+    }
+
+    @Bean
+    public SimpleDateFormat dateFormat() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
     @Bean
@@ -108,11 +121,15 @@ public class UserService implements UserDetailsService {
     /**
      * 注册 TODO
      */
-    public Boolean regUser(User user,  String classId,String role, String schoolTime) {
-        Integer id  = userMapper.insert(user);
-        userMapper.regUserR(id,role);
-        userMapper.regUserS(id,classId);
-        userMapper.regUserStu(user.getCode(),id,schoolTime)
+    @Transactional
+    public Boolean regUser(User user, String classId, String role, String schoolTime) throws ParseException {
+        user.setId(null);
+        userMapper.insert(user);
+        Integer id = user.getId();
+        userMapper.regUserR(id, role);
+        userMapper.regUserS(id, Integer.parseInt(classId));
+        Date date = dateFormat.parse(schoolTime);
+        userMapper.regUserStu(user.getCode(), id, date);
         return false;
     }
 }

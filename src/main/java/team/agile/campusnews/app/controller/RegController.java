@@ -16,10 +16,11 @@ import team.agile.campusnews.app.model.User;
 import team.agile.campusnews.app.service.SchoolOsService;
 import team.agile.campusnews.app.service.UserService;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
- * @author 董文强
+ *
  * @Time 2018/5/24 19:45
  */
 @RestController
@@ -52,9 +53,13 @@ public class RegController {
             user.setCode(studentCode);
             user.setWxName(userInfo.getNickName());
             user.setSex(userInfo.getGender());
+
             userService.regUser(user, classId, "学生",schoolTime);
         } catch (WxErrorException e) {
            LOGGER.error(e.getError().getErrorMsg());
+            return false;
+        } catch (ParseException e) {
+            LOGGER.error(e.getLocalizedMessage());
             return false;
         }
         return true;
@@ -64,6 +69,5 @@ public class RegController {
     public List<SchoolOs> getSchoolAll(String schoolID) {
         if (schoolID == null) schoolID = "1";
         return schoolOsService.getSchhoByID(schoolID);
-        //return
     }
 }

@@ -15,9 +15,9 @@ public interface UserMapper {
 
     int regUserS(@Param("userId") Integer userId, @Param("schoolId") Integer schoolId);
 
-    int regUserR(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
+    int regUserR(@Param("userId") Integer userId, @Param("role") String role_name);
 
-    int regUserStu(@Param("stu_code") Integer stuCode, @Param("user_id") Integer userId, @Param("school_time") Date schoolTime);
+    int regUserStu(@Param("stu_code") String stuCode, @Param("user_id") Integer userId, @Param("school_time") Date schoolTime);
 
     int insertSelective(User record);
 

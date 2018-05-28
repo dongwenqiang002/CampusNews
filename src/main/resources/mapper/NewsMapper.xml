@@ -6,18 +6,23 @@
         <result column="context" jdbcType="VARCHAR" property="context"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="pubdate" jdbcType="TIMESTAMP" property="pubdate"/>
-        <result column="author" jdbcType="INTEGER" property="author"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <association property="author" jdbcType="string" column="author" select="selectNewsAuthor"/>
         <association property="type" javaType="string" column="type" select="selectNewsTypeByTypeId"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, context, title, pubdate, author, remark, end_time, `type`
   </sql>
+
     <!--用于关联查询,不对外-->
     <select id="selectNewsTypeByTypeId" parameterType="int" resultType="string">
     SELECT type_name FROM news_type WHERE id = #{type}
   </select>
+    <select id="selectNewsAuthor" parameterType="int" resultType="string">
+    SELECT `name` FROM user WHERE id = #{author}
+  </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -14,7 +14,7 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * @author 董文强
+ *
  * @Time 2018/5/17 13:37
  * 用来获取自己可以看到的新闻
  */
@@ -32,13 +32,14 @@ public class NewsController {
         //学生获取新闻
         if (request.isUserInRole("学生")) {
             return newsService.getNews(userName);
-        }else{
+        } else {
             return null;
         }
-      //  return null;
+        //  return null;
     }
+
     @GetMapping("/addNews")
-    public List<News> addNews(Principal user, HttpServletRequest request,String context) {
+    public List<News> addNews(Principal user, HttpServletRequest request, String context) {
         String userName = user.getName();
         News news = new News();
 
@@ -46,11 +47,12 @@ public class NewsController {
         //学生获取新闻
         if (request.isUserInRole("学生")) {
             return newsService.getNews(userName);
-        }else{
+        } else {
             return null;
         }
         //  return null;
     }
+
     @Autowired
     public NewsController(NewsService newsService) {
         this.newsService = newsService;

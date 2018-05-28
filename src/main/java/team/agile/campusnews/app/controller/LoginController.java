@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.Action;
 
 /**
- * @author 董文强
  * @Time 2018/5/17 11:22
  * 控制用户登录时跳转逻辑
  */

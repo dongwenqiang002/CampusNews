@@ -11,7 +11,7 @@ public class News {
 
     private Date pubdate;
 
-    private Integer author;
+    private String author;
 
     private String remark;
 
@@ -52,11 +52,11 @@ public class News {
         this.pubdate = pubdate;
     }
 
-    public Integer getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Integer author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

@@ -38,12 +38,12 @@
     insert into user_schoolos (user_id, schoolOS_id) values(#{userId} ,#{schoolId})
   </insert>
   <insert id="regUserR" >
-    insert into user_role (user_id, role_id) values (#{userId} ,#{roleId})
+    INSERT INTO user_role (user_id,role_id) VALUES(#{userId} ,(SELECT id FROM role WHERE role_name=#{role}))
   </insert>
   <insert id="regUserStu" >
     insert into user_student (stu_code, user_id, school_time) values (#{code},#{userId},#{schoolTime})
   </insert>
-  <insert id="insert" parameterType="team.agile.campusnews.app.model.User">
+  <insert id="insert" parameterType="team.agile.campusnews.app.model.User" useGeneratedKeys="true" keyProperty="id">
     insert into user ( username, code,`name`, sex)
     values ( #{username}, #{code},#{name}, , #{sex} )
   </insert>

@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * @author 董文强
+ *
  * @Time 2018/5/17 12:15
  */
 public class Test {

@@ -2,35 +2,109 @@
   padding: 8px 0;
 }
 
-.item {
-  padding: 8px;
-  background-color: #fff;
-  border-top: 1px solid #e4e4e4;
-  color: #787878;
+/*分类*/
+.index-nav {
+  height: 60px;
+  /*background: red;*/
+  display: flex;
+  flex-direction: row;
+  /*align-items: center;*/
+  background-color: blue;
+  color: #646464;
 }
-
-.item image {
-  display: block;
-  width: 129px;
-  height: 114px;
+.index-nav view {
+  flex: 1;
+  flex-direction: column;
+  border-right: 1px solid #F2f2f2;
 }
-
-.item-right {
-  margin-left: 11px;
+.index-nav image {
+  width: 38px;
+  height: 38px;
 }
-
-.title {
-  margin-bottom: 25px;
-}
-.title text {
+.index-nav text {
   font-size: 16px;
-  color: #787878;
 }
 
-text {
+
+view.text {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 10px 10px 12px;
   font-size: 15px;
-  color: #444;
+  color: #656565;
 }
-.c-1 {
-  color: #09bb07;
+
+view.text:before {
+    position: absolute;
+    display: block;
+    content: ' ';
+    left: -5px;
+    width: 2px;
+    height: 100%;
+    background-color: #09bb07;
+}
+.line_y {
+  width: 3px;
+  height: 100%;
+  height: 18px;
+  display: inline-block;
+  background-color: #09bb07;
+}
+view.text text {
+  margin-left: 10px;
+  line-height: 18px;
+}
+
+.item {
+  margin-bottom: 7px;
+  height: 126px;
+}
+
+
+
+.card button {
+    width: 400rpx;
+    margin-top: 30px;
+    margin-bottom: 25rpx;
+    /*margin: 10rpx 75rpx;*/
+}
+
+.card, #wordscard {
+    background: #0e61af;
+    margin: 20rpx 14px;
+    padding: 20px 32rpx;
+    border-radius: 2%;
+}
+.title {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding-bottom: 20rpx;
+    padding-top: 20rpx;
+}
+
+.tag {
+    font-weight: 200;
+    font-size: .8em;
+    padding-bottom: 30rpx;
+    padding-top: 30rpx;
+    color: #006621;
+}
+
+.para {
+    font-size: .9em;
+    padding-bottom: 30rpx;
+    padding-top: 30rpx;
+}
+.tlink {
+    font-size: .7em;
+    color: #0e61af;
+    padding-top: 10rpx;
+    width: 100%;
+}
+.card short-card{
+   font-size: .7em;
+   background-color: #00CCFF;
+    padding-top: 10rpx;
+    width: 100%;
 }

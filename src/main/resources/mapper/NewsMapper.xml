@@ -8,7 +8,7 @@
         <result column="pubdate" jdbcType="TIMESTAMP" property="pubdate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
-        <association property="author" jdbcType="string" column="author" select="selectNewsAuthor"/>
+        <association property="author" javaType="string" column="author" select="selectNewsAuthor"/>
         <association property="type" javaType="string" column="type" select="selectNewsTypeByTypeId"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -20,7 +20,7 @@
     SELECT type_name FROM news_type WHERE id = #{type}
   </select>
     <select id="selectNewsAuthor" parameterType="int" resultType="string">
-    SELECT `name` FROM user WHERE id = #{author}
+    SELECT `name` FROM `user` WHERE id = #{author}
   </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

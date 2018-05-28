@@ -8,13 +8,13 @@ Page({
     // 轮播
     index_index_scroll_tmpl: {
       images: [
-        'http://192.168.43.47:8080/file/image/timg.jpg',
-        'http://192.168.43.47:8080/file/image/tushuguan.jpg',
-        'http://192.168.43.47:8080/file/image/ufe.jpg',
-        'http://192.168.43.47:8080/file/image/xiaoxunbei.jpg',
-        'http://192.168.43.47:8080/file/image/huahua.jpg',
-        'http://192.168.43.47:8080/file/image/xingzhenglou.jpg',
-        'http://192.168.43.47:8080/file/image/erjiao.jpg',
+        'http://127.0.0.1:8080/file/image/timg.jpg',
+        'http://127.0.0.1:8080/file/image/tushuguan.jpg',
+        'http://127.0.0.1:8080/file/image/ufe.jpg',
+        'http://127.0.0.1:8080/file/image/xiaoxunbei.jpg',
+        'http://127.0.0.1:8080/file/image/huahua.jpg',
+        'http://127.0.0.1:8080/file/image/xingzhenglou.jpg',
+        'http://127.0.0.1:8080/file/image/erjiao.jpg',
       ],
       indicatorDots: true,
       vertical: false,
@@ -26,13 +26,13 @@ Page({
     index_index_navs_tmpl: {
       navs: [
         {
-          image: 'http://192.168.43.47:8080/file/image/2.jpg',
+          image: 'http://127.0.0.1:8080/file/image/2.jpg',
           text: '提醒'
         }, {
-          image: 'http://192.168.43.47:8080/file/image/3.jpg',
+          image: 'http://127.0.0.1:8080/file/image/3.jpg',
           text: '公告'
         }, {
-          image: 'http://192.168.43.47:8080/file/image/1.jpg',
+          image: 'http://127.0.0.1:8080/file/image/1.jpg',
           text: '活动'
         }
       ]
@@ -83,7 +83,7 @@ Page({
     })*/
     let that = this;
     wx.request({
-      url: 'http://192.168.43.47:8080',
+      url: 'http://127.0.0.1:8080',
       success: function (res) {
         that.setData({
           "news_list.items" : res.data

@@ -28,17 +28,26 @@
     </view>
   </block>
 </template>
+
 <!--index_index_news 大新闻列表元素-->
 <template name="index_index_items_news">
   <block wx:for="{{items}}" wx:key="item.id">
-     <view class="l-r l-c item">
-     <view class="l_auto item-right">
-     <text>{{item.title}}</text>
-    <text>{{item.context}}</text>
-    </view>
+    <view class="l-r l-c item">
+    
+      <view class="image">
+  
+  <text>{{item.author}}</text>
+  <text>{{item.pubdate}}</text>
+      
+      </view>
+      <view class="l_auto item-right">
+        <view class="title"><text>{{item.title}}</text></view>
+  
+      </view>
     </view>
   </block>
 </template>
+
 
 
 <!--list_index_items-->

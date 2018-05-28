@@ -8,13 +8,13 @@ Page({
     // 轮播
     index_index_scroll_tmpl: {
       images: [
-        'http://127.0.0.1:8080/file/image/timg.jpg',
-        'http://127.0.0.1:8080/file/image/tushuguan.jpg',
-        'http://127.0.0.1:8080/file/image/ufe.jpg',
-        'http://127.0.0.1:8080/file/image/xiaoxunbei.jpg',
-        'http://127.0.0.1:8080/file/image/huahua.jpg',
-        'http://127.0.0.1:8080/file/image/xingzhenglou.jpg',
-        'http://127.0.0.1:8080/file/image/erjiao.jpg',
+        'http://192.168.43.47:8080/file/image/timg.jpg',
+        'http://192.168.43.47:8080/file/image/tushuguan.jpg',
+        'http://192.168.43.47:8080/file/image/ufe.jpg',
+        'http://192.168.43.47:8080/file/image/xiaoxunbei.jpg',
+        'http://192.168.43.47:8080/file/image/huahua.jpg',
+        'http://192.168.43.47:8080/file/image/xingzhenglou.jpg',
+        'http://192.168.43.47:8080/file/image/erjiao.jpg',
       ],
       indicatorDots: true,
       vertical: false,
@@ -26,20 +26,30 @@ Page({
     index_index_navs_tmpl: {
       navs: [
         {
-          image: 'http://127.0.0.1:8080/file/image/2.jpg',
+          image: 'http://192.168.43.47:8080/file/image/2.jpg',
           text: '提醒'
         }, {
-          image: 'http://127.0.0.1:8080/file/image/3.jpg',
+          image: 'http://192.168.43.47:8080/file/image/3.jpg',
           text: '公告'
         }, {
-          image: 'http://127.0.0.1:8080/file/image/1.jpg',
+          image: 'http://192.168.43.47:8080/file/image/1.jpg',
           text: '活动'
         }
       ]
     },
+    
    //新闻列表内容
     news_list: {
       items: [{
+        id: 1,
+        context: "毋庸置疑，Spring Boot在众多.....",
+        title: "我眼中的Spring Boot",
+        pubdate: "2018-05-17T05:28:50.000+0000",
+        author: 1,
+        remark: "转载自CSDN",
+        endTime: "2018-05-25T09:04:58.000+0000",
+        type: "学习"
+      }, {
         id: 1,
         context: "毋庸置疑，Spring Boot在众多.....",
         title: "我眼中的Spring Boot",
@@ -60,15 +70,20 @@ Page({
   },
   swiperchange: function () {
 
-  }
-  ,
+  },
+  //
+  toNewsDetail: function(){
+    wx.navigateTo({
+      url: "/pages/newsDetail/index?id=1",
+    })
+  },
   onLoad: function () {
   /*  wx.redirectTo({
       url: '/pages/reg/reg',
     })*/
     let that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080',
+      url: 'http://192.168.43.47:8080',
       success: function (res) {
         that.setData({
           "news_list.items" : res.data

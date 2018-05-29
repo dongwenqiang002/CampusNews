@@ -18,8 +18,4 @@ wechat:
   miniapp:
     appid: wxaa5d5902c49a521c
     secret: 0b332b84919cfd0f0f000c0e47d5d0a6
-<<<<<<< HEAD
 fileForTarget: E:\idea_project\CampusNews\file
-=======
-fileForTarget: D:\Desktop\PROJECT\CampusNews\file
->>>>>>> 3433785d439c251a20253f2f400f4ac2438501a0

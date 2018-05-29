@@ -38,7 +38,7 @@ public class RegController {
     private SchoolOsService schoolOsService;
 
     @PostMapping("/reg")
-    public String register(String studentCode, String code, String iv, String encryptedData, String schoolTime, String classId, HttpServletRequest request) {
+    public String register(String studentCode, String code, String name ,String iv, String encryptedData, String schoolTime, String classId, HttpServletRequest request) {
         try {
             LOGGER.info("studentCode:{}", studentCode);
             LOGGER.info("iv:{}", iv);
@@ -51,10 +51,10 @@ public class RegController {
 
             User user = new User();
             user.setUsername(sess.getOpenid());
-
+            user.setName(name);
             user.setCode(studentCode);
             user.setWxName(userInfo.getNickName());
-            user.setSex(userInfo.getGender());
+            user.setSex((userInfo.getGender().equals("1")?"男":"女"));
 
             userService.regUser(user, classId, "学生",schoolTime);
             request.login(user.getUsername(),null);

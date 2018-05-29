@@ -86,7 +86,3 @@
     right: 0;
     background-color: #D8D8D8;
 }
-
-.submit_button{
-  background-color: green;
-}

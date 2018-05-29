@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     public UserService(UserMapper userMapper) {
         this.userMapper = userMapper;
-        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
 
 

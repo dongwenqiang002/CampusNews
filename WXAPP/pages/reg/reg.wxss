@@ -8,6 +8,7 @@
 .head{
     padding: 80rpx;
     line-height: 1;
+    padding-left: 300rpx;
 }
 .body{
     padding-left: 30rpx;
@@ -16,6 +17,7 @@
 }
 .title{
     font-size: 52rpx;
+    justify-content:center;
 }
 .desc{
     margin-top: 10rpx;
@@ -26,7 +28,7 @@
 .widgets__item{
     margin-top: 20rpx;
     margin-bottom: 20rpx;
-    background-color: #FFFFFF;
+    background-color:#CCCCFF;
     overflow: hidden;
     border-radius: 4rpx;
     cursor: pointer;

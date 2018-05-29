@@ -159,7 +159,7 @@ Page({
               iv: dd.detail.iv,
               name: that.data.name,
               encryptedData: dd.detail.encryptedData,
-              schoolTime: that.time,
+              schoolTime: that.data.time,
               classId: that.data.stuClass.id
             },
             success: function (res) {

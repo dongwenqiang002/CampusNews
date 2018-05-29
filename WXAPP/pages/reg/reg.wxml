@@ -8,14 +8,16 @@
 
 
       <view class="widgets__item">
-        <view class="widgets__info " bindtap="widgetsToggle">
+        <view class="widgets__info ">
           <text class="widgets__info-name">学号：</text>
-          <input name="studentCode" bindinput="studentCodeInput" />
+           <input name="studentCode" bindinput="studentCodeInput" >
+         </input>
         </view>
-      </view>
+      </view>  
+
 
       <view class="widgets__item">
-        <view class="widgets__info " bindtap="widgetsToggle">
+        <view class="widgets__info ">
           <text class="widgets__info-name">姓名：</text>
           <input name="name" bindinput="nameInput" />
         </view>

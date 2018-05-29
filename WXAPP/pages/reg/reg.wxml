@@ -44,7 +44,7 @@
       <!--bindtap="submitff" -->
       <view class="widgets__item">
         <view class="widgets__info ">
-          <button bindgetuserinfo="submitff" open-type="getUserInfo">确认提交</button>
+          <button bindgetuserinfo="submitff" open-type="getUserInfo" class='submit_button'>确认提交</button>
         </view>
       </view>
     </view>

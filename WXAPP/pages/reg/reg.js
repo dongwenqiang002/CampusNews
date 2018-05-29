@@ -1,3 +1,5 @@
+var header = getApp().globalData.header;
+const app = getApp()
 // pages/reg/reg.js
 Page({
 
@@ -5,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    schoolOSS:[[],[]],
-    stuClass: undefined,
+    schoolOSS:[[],[],[]],
+    stuClass: {name:'未选择'},
     time: '2015-9-00',
     userInfo: undefined,
     userDetail: undefined,
@@ -41,18 +43,19 @@ Page({
   onChangSchool:function(v){
     let that = this;
      // column: column, value: value
-    console.log(v.detail.column);
+    //console.log(v.detail.column);
     let sc = this.data.schoolOSS[v.detail.column][v.detail.value];
+    console.log("一次改变")
     if(sc == undefined)return;
     wx.request({
-      url: 'http://192.168.43.47:8080/reg/school',
+      url: 'http://127.0.0.1:8080/reg/school',
       data: { schoolID: sc.id},
       success: function (res) {
         if(res.data){
           let scho = that.data.schoolOSS;
           scho[v.detail.column+1] = res.data;
           that.setData({
-            schoolOSS: scho
+            'schoolOSS': scho
           })
           console.log(that.data.schoolOSS)
           v.detail.column = v.detail.column+1;
@@ -87,7 +90,7 @@ Page({
   onLoad: function (options) {
     let that = this;
     wx.request({
-      url: 'http://192.168.43.47:8080/reg/school',
+      url: 'http://127.0.0.1:8080/reg/school',
       success: function (res) {
         let scc = that.data.schoolOSS;
         console.log(res.data);
@@ -145,7 +148,7 @@ Page({
         if (logRes.code) {
           console.log(that.data.userInfo);
           wx.request({
-            url: 'http://192.168.43.47:8080/reg/reg',
+            url: 'http://127.0.0.1:8080/reg/reg',
             header:{
               'content-type': 'application/x-www-form-urlencoded'
             },
@@ -161,6 +164,28 @@ Page({
             },
             success: function (res) {
               console.log(res);
+              if(res.data){
+                app.globalData.header.Cookie = 'JSESSIONID=' + res.data;
+                wx.redirectTo({
+                  url: '/pages/index/index',
+                })
+              }else{
+                wx.showToast({
+                  title: '注册信息有误',
+                  icon: 'none',
+                  duration: 2000
+                })
+                return;
+              }
+            },
+            fail: function(ree){
+              console.log(ree);
+              wx.showToast({
+                title: '注册信息有误',
+                icon: 'none',
+                duration: 2000
+              })
+              return;
             }
           });
 

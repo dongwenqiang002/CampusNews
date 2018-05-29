@@ -57,6 +57,11 @@ public class NewsService {
 
 
     }
+
+
+    public News getNews(Integer newsId) {
+        return  newsMapper.selectByPrimaryKey(newsId);
+    }
     /**
      * @return 学校大事件
      * @exception null

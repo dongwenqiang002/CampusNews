@@ -14,7 +14,7 @@ Page({
         endTime: "2018-05-25T09:04:58.000+0000",
         type: "学习"
       }]
-  },
+    },
     index_index_navs_tmpl: {
       navs: [
         {
@@ -30,22 +30,26 @@ Page({
       ]
     }
   },
-  toNewsDetail: function () {
+  toNewsDetail: function (e) {
     wx.navigateTo({
-      url: "/pages/newsDetail/index?id=1",
+      url: "/pages/newsDetail/index?id=" + e.currentTarget.dataset.id
     })
   },
-    //
+  //
   //事件处理函数
   onLoad: function (options) {
-
+    let that = this;
     this.title = options.type || '列表'
     console.log("访问新闻")
     wx.request({
       url: 'http://127.0.0.1:8080/news/get',
       header: header,
       success: function (res) {
-        console.log(res.data);
+        that.setData({
+          "news_list.items": res.data
+        });
+      },
+      fail: function (r) {
       }
     });
 

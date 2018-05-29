@@ -16,7 +16,7 @@ App({
         if (logRes.code) {
           console.log(logRes.code);
           wx.request({
-            url: 'http://192.168.43.47:8080/login/wxlogin',
+            url: 'http://127.0.0.1:8080/login/wxlogin',
             data: {
               code: logRes.code
             },
@@ -31,6 +31,11 @@ App({
                   url: '/pages/reg/reg',
                 })
               }
+            },
+            fail: function (e) {
+              wx.redirectTo({
+                url: '/pages/reg/reg',
+              })
             }
           })
         }

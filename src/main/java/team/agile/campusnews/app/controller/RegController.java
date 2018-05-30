@@ -7,6 +7,7 @@ import me.chanjar.weixin.common.exception.WxErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,7 @@ public class RegController {
     @PostMapping("/reg")
     public String register(String studentCode, String code, String name ,String iv, String encryptedData, String schoolTime, String classId, HttpServletRequest request) {
         try {
+
             LOGGER.info("studentCode:{}", studentCode);
             LOGGER.info("iv:{}", iv);
             LOGGER.info("code:{}", code);
@@ -54,19 +56,24 @@ public class RegController {
             user.setName(name);
             user.setCode(studentCode);
             user.setWxName(userInfo.getNickName());
-            user.setSex((userInfo.getGender().equals("1")?"男":"女"));
 
-            userService.regUser(user, classId, "学生",schoolTime);
-            request.login(user.getUsername(),null);
+            user.setSex((userInfo.getGender().equals("1")?"男":"女"));
+            LOGGER.info("查寻数据库有没有");
+            try {
+                userService.loadUserByUsername(sess.getOpenid());
+            }catch (UsernameNotFoundException e){
+                try {
+                    userService.regUser(user, classId, "学生", schoolTime);
+                    request.login(user.getUsername(),null);
+                } catch (ParseException | ServletException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+
             return request.getSession().getId();
         } catch (WxErrorException e) {
            LOGGER.error(e.getError().getErrorMsg());
-            return null;
-        } catch (ParseException e) {
-            LOGGER.error(e.getLocalizedMessage());
-            return null;
-        } catch (ServletException e) {
-            e.printStackTrace();
             return null;
         }
 

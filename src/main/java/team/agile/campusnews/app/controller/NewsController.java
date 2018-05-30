@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.agile.campusnews.app.model.News;
+import team.agile.campusnews.app.model.User;
 import team.agile.campusnews.app.service.NewsService;
+import team.agile.campusnews.app.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -24,6 +26,8 @@ public class NewsController {
     private static final Logger LOGGER = LoggerFactory.getLogger(NewsController.class);
 
     private NewsService newsService;
+    @Autowired
+    private UserService userServicel;
 
     @GetMapping("/get")
     public List<News> getNews(Principal user, HttpServletRequest request) {
@@ -55,6 +59,34 @@ public class NewsController {
             return null;
         }
         //  return null;
+    }
+
+    /**
+     * 获取用户个人信息
+     * */
+    @GetMapping("/userDetail")
+    public String userDetail(Principal user){
+
+        user.getName();
+        User u = (User) userServicel.loadUserByUsername(user.getName());
+        //user
+        //  user.setPassword("123");
+        return "[\n" +
+                "  {\n" +
+                "  \"name\": \"姓名\",\n" +
+                "  \"data\": \""+u.getName()+"\"\n" +
+                "  }, {\n" +
+                "  \"name\": \"学院\",\n" +
+                "  \"data\": \""+u.getSchoolOs().get(0).getParentSchoolOs().getName()+"\"\n" +
+                "}, {\n" +
+                "  \"name\": \"班级\",\n" +
+                "  \"data\": \""+u.getSchoolOs().get(0).getName()+"\"\n" +
+                "},{\n" +
+                " \"name\": \"学号\",\n" +
+                "  \"data\": \""+u.getCode()+"\"\n" +
+                "}\n" +
+                "  \n" +
+                "]";
     }
 
     @Autowired

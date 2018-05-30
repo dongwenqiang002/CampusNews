@@ -44,8 +44,8 @@
     insert into user_student (stu_code, user_id, school_time) values (#{stu_code},#{user_id},#{school_time})
   </insert>
   <insert id="insert" parameterType="team.agile.campusnews.app.model.User" useGeneratedKeys="true" keyProperty="id">
-    insert into user ( username, code,`name`, sex)
-    values ( #{username}, #{code},#{name},  #{sex} )
+    insert into user ( username, code,`name`, sex ,avatarUrl)
+    values ( #{username}, #{code},#{name},  #{sex} ,#{avatarUrl})
   </insert>
   <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.User">
     insert into user

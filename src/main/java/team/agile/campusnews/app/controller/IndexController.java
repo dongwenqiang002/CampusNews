@@ -14,6 +14,7 @@ import team.agile.campusnews.app.model.User;
 import team.agile.campusnews.app.service.NewsService;
 
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.List;
 
 /**

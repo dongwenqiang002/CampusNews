@@ -32,7 +32,7 @@ public class FileServices {
     public void init() throws NoSuchFileException, FileNotFoundException {
         File dir = new File(fileDir);
         if (!dir.exists()) {
-            dir  = org.springframework.util.ResourceUtils.getFile("/");
+            dir  = org.springframework.util.ResourceUtils.getFile("/file");
             fileDir = dir.toString();
             //fileDir = "E:/Desktop/project/file";
            //dir = new File(fileDir);

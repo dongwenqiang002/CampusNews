@@ -4,24 +4,34 @@ Page({
   data: {
     list: [
       {
-        id: 'view',
         name: '姓名',
         data: '',
       }, {
-        id: 'content',
         name: '学院',
         data: '',
       }, {
-        id: 'form',
         name: '班级',
         data: '',
       }, {
-        id: 'feedback',
         name: '学号',
         data: '',
       }
     ]
   },
+  onLoad: function(){
+    let that = this;
+    wx.request({
+      url: app.globalData.services + '/news/userDetail',
+      header: header,
+      success: function (res) {
+        that.setData({
+          "list": res.data
+        });
+      },
+      fail: function (r) {
+      }
+    });
+  } ,
   widgetsToggle: function (e) {
     var id = e.currentTarget.id, list = this.data.list;
     for (var i = 0, len = list.length; i < len; ++i) {

@@ -14,7 +14,7 @@
             <block wx:for-items="{{list}}" wx:key="item.id">
 
                 <view class="widgets__item">
-                    <view id="{{item.id}}" class="widgets__info " bindtap="widgetsToggle">
+                    <view  class="widgets__info " bindtap="widgetsToggle">
                         <text class="widgets__info-name">{{item.name}}</text>
                          <text class="widgets__info-name">{{item.data}}</text>
                     </view>

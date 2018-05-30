@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author 董文强
+ *
  * @Time 2018/5/17 12:41
  *
  * *******用来允许跨域访问*******

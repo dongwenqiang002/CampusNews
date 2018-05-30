@@ -15,7 +15,7 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 
 /**
- * @author 董文强
+ *
  * @Time 2018/3/12 17:11
  */
 @Configuration

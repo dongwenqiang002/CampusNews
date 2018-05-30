@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author <a href="https://github.com/binarywang">Binary Wang</a>
+ *
  */
 @ConfigurationProperties(prefix = "wechat.miniapp")
 public class WxMaProperties {

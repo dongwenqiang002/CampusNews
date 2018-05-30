@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author 董文强
+ *
  * @Time 2018/5/23 9:51
  */
 @Configuration

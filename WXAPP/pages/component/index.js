@@ -6,28 +6,19 @@ Page({
       {
         id: 'view',
         name: '姓名',
-        open: false,
-        pages: ['view', 'scroll-view', 'swiper']
+        data: '',
       }, {
         id: 'content',
         name: '学院',
-        open: false,
-        pages: ['text', 'icon', 'progress']
+        data: '',
       }, {
         id: 'form',
         name: '班级',
-        open: false,
-        pages: ['button', 'checkbox', 'form', 'input', 'label', 'picker', 'radio', 'slider', 'switch']
+        data: '',
       }, {
         id: 'feedback',
         name: '学号',
-        open: false,
-        pages: ['action-sheet', 'modal', 'toast', 'loading']
-      }, {
-        id: 'nav',
-        name: '导航',
-        open: false,
-        pages: ['navigator']
+        data: '',
       }
     ]
   },

@@ -171,6 +171,8 @@ Page({
               if(res.data){
                 console.log('注册成功');
                 app.globalData.header.Cookie = 'JSESSIONID=' + res.data;
+                app.globalData.userInfo = { nickName: '登录成功' };  // .userInfo;
+                typeof cb == "function" && cb(app.globalData.userInfo)
                 wx.switchTab({
                   url: '/pages/index/index',
                 })

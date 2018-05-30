@@ -16,7 +16,7 @@ App({
         if (logRes.code) {
           console.log(logRes.code);
           wx.request({
-            url: 'http://127.0.0.1:8080/login/wxlogin',
+            url: app.globalData.services +'/login/wxlogin',
             data: {
               code: logRes.code
             },
@@ -24,7 +24,7 @@ App({
               console.log(res.data)
               if(res.data){
                 that.globalData.header.Cookie = 'JSESSIONID=' + res.data;
-                that.globalData.userInfo = { nickName:'董文强'};  // .userInfo;
+                that.globalData.userInfo = { nickName:'登录成功'};  // .userInfo;
                 typeof cb == "function" && cb(that.globalData.userInfo)
               }else{
                 wx.redirectTo({
@@ -67,7 +67,7 @@ App({
     //---------\/-------------
     //就是这里 修改服务器的 IP地址           //------//----------------------
                                           //------//-----------------------
-    services: 'http://127.0.0.1:8080',   //----<<<<<<=====================-
+    services: 'http://192.168.0.112:8080',   //----<<<<<<=====================-
   //                                     \\-------\\-----------------------
     //就是这里 修改服务器的 IP地址          \\-------\\----------------------
     //---------/\-----------               \\-------\\---------------------

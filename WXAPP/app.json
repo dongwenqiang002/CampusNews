@@ -10,8 +10,8 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "校园新闻",
-    "navigationBarBackgroundColor": "#0767c8",
+    "navigationBarTitleText": "西财新闻小叮当",
+    "navigationBarBackgroundColor": "#00CCFF",
     "backgroundColor": "#fbf9fe",
     "enablePullDownRefresh": true
   },

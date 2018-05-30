@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import team.agile.campusnews.app.dao.SchoolOsMapper;
 import team.agile.campusnews.app.dao.UserMapper;
 import team.agile.campusnews.app.model.News;
@@ -18,7 +20,7 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * 测试
+ *
  * */
 @RestController
 public class IndexController {
@@ -32,6 +34,8 @@ public class IndexController {
 
         return  newsService.getNews();
     }
+
+
 
     @PostMapping("/jj")
     public User u(HttpServletResponse response){

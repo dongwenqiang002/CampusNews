@@ -16,7 +16,7 @@ App({
         if (logRes.code) {
           console.log(logRes.code);
           wx.request({
-            url: app.globalData.services +'/login/wxlogin',
+            url: that.globalData.services +'/login/wxlogin',
             data: {
               code: logRes.code
             },

@@ -1,5 +1,5 @@
 //index.js
-//获取应用实例
+var header = getApp().globalData.header;
 const app = getApp()
 
 Page({
@@ -8,13 +8,13 @@ Page({
     // 轮播
     index_index_scroll_tmpl: {
       images: [
-        'http://127.0.0.1:8080/file/image/timg.jpg',
-        'http://127.0.0.1:8080/file/image/tushuguan.jpg',
-        'http://127.0.0.1:8080/file/image/ufe.jpg',
-        'http://127.0.0.1:8080/file/image/xiaoxunbei.jpg',
-        'http://127.0.0.1:8080/file/image/huahua.jpg',
-        'http://127.0.0.1:8080/file/image/xingzhenglou.jpg',
-        'http://127.0.0.1:8080/file/image/erjiao.jpg',
+        app.globalData.services +'/file/image/timg.jpg',
+        app.globalData.services +'/file/image/tushuguan.jpg',
+        app.globalData.services +'/file/image/ufe.jpg',
+        app.globalData.services +'/file/image/xiaoxunbei.jpg',
+        app.globalData.services +'/file/image/huahua.jpg',
+        app.globalData.services +'/file/image/xingzhenglou.jpg',
+        app.globalData.services +'/file/image/erjiao.jpg',
       ],
       indicatorDots: true,
       vertical: false,
@@ -26,13 +26,13 @@ Page({
     index_index_navs_tmpl: {
       navs: [
         {
-          image: 'http://127.0.0.1:8080/file/image/2.jpg',
+          image: app.globalData.services +'/file/image/2.jpg',
           text: '提醒'
         }, {
-          image: 'http://127.0.0.1:8080/file/image/3.jpg',
+          image: app.globalData.services +'/file/image/3.jpg',
           text: '公告'
         }, {
-          image: 'http://127.0.0.1:8080/file/image/1.jpg',
+          image: app.globalData.services +'/file/image/1.jpg',
           text: '活动'
         }
       ]
@@ -81,7 +81,7 @@ Page({
     app.userLogin();
     let that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080',
+      url: app.globalData.services ,
       success: function (res) {
         that.setData({
           "news_list.items" : res.data

@@ -41,7 +41,7 @@
     INSERT INTO user_role (user_id,role_id) VALUES(#{userId} ,(SELECT id FROM role WHERE role_name=#{role}))
   </insert>
   <insert id="regUserStu" >
-    insert into user_student (stu_code, user_id, school_time) values (#{code},#{userId},#{schoolTime})
+    insert into user_student (stu_code, user_id, school_time) values (#{stu_code},#{user_id},#{school_time})
   </insert>
   <insert id="insert" parameterType="team.agile.campusnews.app.model.User" useGeneratedKeys="true" keyProperty="id">
     insert into user ( username, code,`name`, sex)

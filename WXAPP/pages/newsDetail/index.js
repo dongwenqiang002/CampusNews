@@ -1,4 +1,5 @@
 var header = getApp().globalData.header;
+const app = getApp()
 
 Page({
 
@@ -26,7 +27,7 @@ Page({
       console.log(options.id)
       let that = this;
       wx.request({
-        url: 'http://127.0.0.1:8080/news/detail',
+        url: app.globalData.services +'/news/detail',
         header: header,
         data: { newsId: options.id},
         success: function (res) {

@@ -48,7 +48,7 @@ Page({
     console.log("一次改变")
     if(sc == undefined)return;
     wx.request({
-      url: 'http://127.0.0.1:8080/reg/school',
+      url: app.globalData.services+'/reg/school',
       data: { schoolID: sc.id},
       success: function (res) {
         if(res.data){
@@ -90,7 +90,7 @@ Page({
   onLoad: function (options) {
     let that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/reg/school',
+      url: app.globalData.services +'/reg/school',
       success: function (res) {
         let scc = that.data.schoolOSS;
         console.log(res.data);
@@ -144,11 +144,15 @@ Page({
     }
     let that = this;
     wx.login({
+      //login - begin
       success: function (logRes) {
         if (logRes.code) {
           console.log(that.data.userInfo);
+          wx.getUserInfo({
+            success: function (uuu) {
+          //服务器 登录
           wx.request({
-            url: 'http://127.0.0.1:8080/reg/reg',
+            url: app.globalData.services +'/reg/reg',
             header:{
               'content-type': 'application/x-www-form-urlencoded'
             },
@@ -156,17 +160,18 @@ Page({
             data: {
               studentCode: that.data.studentCode,
               code: logRes.code,
-              iv: dd.detail.iv,
+              iv: uuu.iv,
               name: that.data.name,
-              encryptedData: dd.detail.encryptedData,
+              encryptedData: uuu.encryptedData,
               schoolTime: that.data.time,
               classId: that.data.stuClass.id
             },
             success: function (res) {
               console.log(res);
               if(res.data){
+                console.log('注册成功');
                 app.globalData.header.Cookie = 'JSESSIONID=' + res.data;
-                wx.redirectTo({
+                wx.switchTab({
                   url: '/pages/index/index',
                 })
               }else{
@@ -188,11 +193,11 @@ Page({
               return;
             }
           });
-
-
-
+          //服务器登录结束
+          }})
         }
       }
+       //login - end
     })
    
   },

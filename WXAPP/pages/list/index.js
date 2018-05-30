@@ -1,4 +1,5 @@
 var header = getApp().globalData.header;
+const app = getApp()
 Page({
   data: {
     title: '',
@@ -18,13 +19,13 @@ Page({
     index_index_navs_tmpl: {
       navs: [
         {
-          image: 'http://127.0.0.1:8080/file/image/2.jpg',
+          image: app.globalData.services +'/file/image/2.jpg',
           text: '提醒'
         }, {
-          image: 'http://127.0.0.1:8080/file/image/3.jpg',
+          image: app.globalData.services +'/file/image/3.jpg',
           text: '公告'
         }, {
-          image: 'http://127.0.0.1:8080/file/image/1.jpg',
+          image: app.globalData.services +'/file/image/1.jpg',
           text: '活动'
         }
       ]
@@ -42,7 +43,7 @@ Page({
     this.title = options.type || '列表'
     console.log("访问新闻")
     wx.request({
-      url: 'http://127.0.0.1:8080/news/get',
+      url: app.globalData.services +'/news/get',
       header: header,
       success: function (res) {
         that.setData({

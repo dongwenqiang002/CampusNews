@@ -11,7 +11,7 @@
     "backgroundTextStyle": "light",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "西财新闻小叮当",
-    "navigationBarBackgroundColor": "#0767c8",
+    "navigationBarBackgroundColor": "#00CCFF",
     "backgroundColor": "#fbf9fe",
     "enablePullDownRefresh": true
   },

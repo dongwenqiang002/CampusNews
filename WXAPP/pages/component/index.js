@@ -1,3 +1,5 @@
+var header = getApp().globalData.header;
+const app = getApp()
 Page({
   data: {
     list: [
@@ -26,11 +28,6 @@ Page({
         name: '导航',
         open: false,
         pages: ['navigator']
-      }, {
-        id: 'media',
-        name: '媒体组件',
-        open: false,
-        pages: ['image', 'audio', 'video', 'map', 'canvas']
       }
     ]
   },

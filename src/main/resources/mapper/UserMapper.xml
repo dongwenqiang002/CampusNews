@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="team.agile.campusnews.app.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="team.agile.campusnews.app.model.User">
+<mapper namespace="team.agile.campusnews.data.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="team.agile.campusnews.data.model.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="code" jdbcType="VARCHAR" property="code" />
@@ -43,11 +43,11 @@
   <insert id="regUserStu" >
     insert into user_student (stu_code, user_id, school_time) values (#{stu_code},#{user_id},#{school_time})
   </insert>
-  <insert id="insert" parameterType="team.agile.campusnews.app.model.User" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="team.agile.campusnews.data.model.User" useGeneratedKeys="true" keyProperty="id">
     insert into user ( username, code,`name`, sex ,avatarUrl)
     values ( #{username}, #{code},#{name},  #{sex} ,#{avatarUrl})
   </insert>
-  <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.User">
+  <insert id="insertSelective" parameterType="team.agile.campusnews.data.model.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -97,7 +97,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.app.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.data.model.User">
     update user
     <set>
       <if test="username != null">
@@ -121,7 +121,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.app.model.User">
+  <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.data.model.User">
     update user
     set username = #{username,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},

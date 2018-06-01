@@ -1,8 +1,8 @@
-package team.agile.campusnews.app.dao;
+package team.agile.campusnews.data.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import team.agile.campusnews.app.model.User;
+import team.agile.campusnews.data.model.User;
 
 import java.util.Date;
 

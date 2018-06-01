@@ -1,8 +1,8 @@
-package team.agile.campusnews.app.dao;
+package team.agile.campusnews.data.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import team.agile.campusnews.app.model.News;
+import team.agile.campusnews.data.model.News;
 
 import java.util.List;
 
@@ -24,5 +24,5 @@ public interface NewsMapper {
 
     List<News> selectByUserId(Integer userId);
 
-    List<News> selectByUserAll(@Param("userId")Integer userId,@Param("sIds") List<Integer> schoolOsId);
+    List<News> selectByUserAll(@Param("userId") Integer userId, @Param("sIds") List<Integer> schoolOsId);
 }

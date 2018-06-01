@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    UserVerificationConfig userVerificationConfig;
+    WxVerificationConfig wxVerificationConfig;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        // auth.userDetailsService(userService);
         //设置登录验证规则为 UserVerificationConfig 类
-        auth.authenticationProvider(userVerificationConfig);
+        auth.authenticationProvider(wxVerificationConfig);
     }
 
 

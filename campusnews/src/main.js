@@ -1,15 +1,20 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-//import axios from 'axios';
+import axios from 'axios';
 import ElementUI from 'element-ui';
 //import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
  import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.baseURL = 'http://127.0.0.1:8088'
+Vue.prototype.$axios = axios;
 //日历
 import 'vue-event-calendar/dist/style.css' //1.1.10之后的版本，css被放在了单独的文件中，方便替换
 import vueEventCalendar from 'vue-event-calendar'
+
+
 Vue.use(vueEventCalendar, {locale: 'zh',}) //可以设置语言，支持中文和英文/*  {
     //locale: 'en',
     //color: 'black', //Set main color
@@ -17,7 +22,6 @@ Vue.use(vueEventCalendar, {locale: 'zh',}) //可以设置语言，支持中文�
    // weekStartOn: 'week Start on which day'  // Can be: 1, 2, 3, 4, 5, 6, 0 (default: 0)
 
 Vue.use(ElementUI, { size: 'small' });
-
 
 
 

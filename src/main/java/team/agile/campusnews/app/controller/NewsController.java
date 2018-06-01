@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.agile.campusnews.app.model.News;
-import team.agile.campusnews.app.model.User;
+import team.agile.campusnews.data.model.News;
+import team.agile.campusnews.data.model.User;
 import team.agile.campusnews.app.service.NewsService;
 import team.agile.campusnews.app.service.UserService;
 

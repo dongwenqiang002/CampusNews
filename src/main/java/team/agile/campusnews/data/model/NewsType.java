@@ -1,4 +1,4 @@
-package team.agile.campusnews.app.model;
+package team.agile.campusnews.data.model;
 
 public class NewsType {
     private Integer id;

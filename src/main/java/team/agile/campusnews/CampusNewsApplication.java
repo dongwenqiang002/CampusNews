@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@MapperScan("team.agile.campusnews.app.dao")
+@MapperScan("team.agile.campusnews.data.dao")
 @EnableTransactionManagement(proxyTargetClass = true) //开启事务
 public class CampusNewsApplication {
 

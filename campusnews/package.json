@@ -1,8 +1,8 @@
 {
   "name": "vue-manage-system",
   "version": "3.1.0",
-  "description": "kuliaoOA",
-  "author": "kuliao",
+  "description": "西财新闻小叮当后台管理",
+  "author": "shijuan",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

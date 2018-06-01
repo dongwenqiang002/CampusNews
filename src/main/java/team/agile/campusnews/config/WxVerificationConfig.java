@@ -12,33 +12,32 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import team.agile.campusnews.manage.service.AdminService;
-
+import team.agile.campusnews.app.service.UserService;
 import java.util.Collection;
 
 /**
  *
+ * @Time 2018/3/13 16:55
  * 验证用户名与密码
  */
 @Component
-public class UserVerificationConfig implements AuthenticationProvider {
+public class WxVerificationConfig implements AuthenticationProvider {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserVerificationConfig.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WxVerificationConfig.class);
 
     @Autowired
-    private AdminService adminService;
+    private UserService userService;
 
 
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
-        String username = authentication.getName();
-        String password = (String) authentication.getCredentials();
+        LOGGER.info("有人登录");
+        String  username = authentication.getName();
+        //String password = (String) authentication.getCredentials();
         UserDetails userDetials;
-
         try {
-            userDetials = null;
+            userDetials = userService.loadUserByUsername(username);
         }catch (UsernameNotFoundException e){
             return null;
         }
@@ -46,19 +45,25 @@ public class UserVerificationConfig implements AuthenticationProvider {
         Collection<? extends GrantedAuthority> authorities = userDetials.getAuthorities();
 
         //判断用户密码是否正确
-        //String MD5Password = MD5Util.MD5(password);
-        if (password.equals(userDetials.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(userDetials, password, authorities);
+        if (true) {
+
+            return new UsernamePasswordAuthenticationToken(userDetials, null, authorities);
+
         } else {
             /*密码不正确*/
             return null;//new UsernamePasswordAuthenticationToken(userDetials,password,null);
         }
     }
 
+
     @Override
-    public boolean supports(Class<?> arg0) {
-        LOGGER.error(arg0.getName());
+    public boolean supports(Class<?> aClass) {
+        //设置可用
         return true;
     }
+
+
+
+
 
 }

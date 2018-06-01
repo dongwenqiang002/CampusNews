@@ -1,6 +1,6 @@
-package team.agile.campusnews.app.dao;
+package team.agile.campusnews.data.dao;
 
-import team.agile.campusnews.app.model.Student;
+import team.agile.campusnews.data.model.Student;
 
 public interface StudentMapper {
     int deleteByPrimaryKey(Integer id);

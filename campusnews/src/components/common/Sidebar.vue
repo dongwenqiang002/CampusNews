@@ -6,16 +6,16 @@
                 <template v-if="item.subs">
                     <el-submenu :index="item.index" :key="item.index">
                         <template slot="title">
-                            <i :class="item.icon"></i><span slot="title">{{ item.menuName }}</span>
+                            <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
                         </template>
                         <el-menu-item v-for="(subItem,i) in item.subs" :key="i" :index="subItem.index">
-                              {{ items.menuName }}
+                              {{ items.title }}
                         </el-menu-item>
                     </el-submenu>
                 </template>
                 <template v-else>
                     <el-menu-item :index="item.index" :key="item.index">
-                        <i :class="item.icon"></i><span slot="title">{{ item.menuName }}</span>
+                        <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
                     </el-menu-item>
                 </template>
             </template>
@@ -30,8 +30,6 @@
             return {
                 collapse: false,
                 items: []
-                //[   http://172.20.0.24:8080/menu菜单接口
-                //  需要个参数code，传zhangsan
             }
         },
         computed:{
@@ -45,10 +43,8 @@
                 this.collapse = msg;
             })
 
-            let params = new URLSearchParams();
-            console.log(localStorage.getItem('empNo'))
-            params.append('empNo',  localStorage.getItem('empNo'));
-            this.$axios.post("http://172.20.0.24:8080/menu",params).then((res) => {
+            //let params = new URLSearchParams();
+            this.$axios.post("/static/jump.json").then((res) => {
                 this.items = res.data;
                 console.log(res);
             })

@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import team.agile.campusnews.app.dao.UserMapper;
-import team.agile.campusnews.app.model.User;
+import team.agile.campusnews.data.dao.UserMapper;
+import team.agile.campusnews.data.model.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

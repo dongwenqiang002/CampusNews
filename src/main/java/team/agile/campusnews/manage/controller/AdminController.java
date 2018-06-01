@@ -1,9 +1,11 @@
-package team.agile.campusnews.app.controller;
+package team.agile.campusnews.manage.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ConcurrentModel;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,24 +24,27 @@ public class AdminController {
     UserService userServicel;
 
     @RequestMapping("/")
-    public ModelAndView login11(String username, String password){
+    public ModelAndView login11(String username, String password) {
         ModelAndView mv = new ModelAndView("/login");
 
         return mv;
     }
-    @GetMapping("/login")
-    public ModelAndView login(){
 
-            return new ModelAndView("/login");
+    @GetMapping("/login")
+    public Model login() {
+        // ModelAndView mv = new ModelAndView();
+        Model m = new ConcurrentModel();
+        //m.addAttribute("user",userServicel.loadUserByUsername())
+        return m;
     }
 
     @PostMapping("/login")
-    public ModelAndView login(String username,String password){
+    public ModelAndView login(String username, String password) {
         ModelAndView mv = new ModelAndView("/index");
-        if(username.equals("admin")&&password.equals("admin")) {
-            login("admin",null);
+        if (username.equals("admin") && password.equals("admin")) {
+            login("admin", null);
             return mv;
-        }else{
+        } else {
             return new ModelAndView("/login");
         }
     }

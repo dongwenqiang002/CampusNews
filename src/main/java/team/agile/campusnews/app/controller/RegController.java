@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.agile.campusnews.app.model.SchoolOs;
-import team.agile.campusnews.app.model.User;
+import team.agile.campusnews.data.model.SchoolOs;
+import team.agile.campusnews.data.model.User;
 import team.agile.campusnews.app.service.SchoolOsService;
 import team.agile.campusnews.app.service.UserService;
 

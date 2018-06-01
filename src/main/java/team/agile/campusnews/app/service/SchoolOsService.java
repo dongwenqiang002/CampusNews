@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.agile.campusnews.app.dao.SchoolOsMapper;
-import team.agile.campusnews.app.model.SchoolOs;
+import team.agile.campusnews.data.dao.SchoolOsMapper;
+import team.agile.campusnews.data.model.SchoolOs;
 
 import java.util.List;
 

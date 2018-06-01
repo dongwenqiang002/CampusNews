@@ -1,7 +1,7 @@
-package team.agile.campusnews.app.dao;
+package team.agile.campusnews.data.dao;
 
 import org.springframework.stereotype.Repository;
-import team.agile.campusnews.app.model.SchoolOs;
+import team.agile.campusnews.data.model.SchoolOs;
 
 import java.util.List;
 

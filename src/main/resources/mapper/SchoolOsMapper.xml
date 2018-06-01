@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="team.agile.campusnews.app.dao.SchoolOsMapper">
-  <resultMap id="BaseResultMap" type="team.agile.campusnews.app.model.SchoolOs">
+<mapper namespace="team.agile.campusnews.data.dao.SchoolOsMapper">
+  <resultMap id="BaseResultMap" type="team.agile.campusnews.data.model.SchoolOs">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="code" jdbcType="VARCHAR" property="code" />
-    <association property="parentSchoolOs" select="selectByPrimaryKey" column="parent_id" javaType="team.agile.campusnews.app.model.SchoolOs" />
+    <association property="parentSchoolOs" select="selectByPrimaryKey" column="parent_id" javaType="team.agile.campusnews.data.model.SchoolOs" />
   </resultMap>
   <sql id="Base_Column_List">
     id, `name`, parent_id, remark, code
@@ -17,7 +17,7 @@
     from schoolos
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByParentId" parameterType="java.lang.Integer" resultType="team.agile.campusnews.app.model.SchoolOs">
+  <select id="selectByParentId" parameterType="java.lang.Integer" resultType="team.agile.campusnews.data.model.SchoolOs">
     select
     <include refid="Base_Column_List" />
     from schoolos
@@ -31,13 +31,13 @@
     delete from schoolos
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="team.agile.campusnews.app.model.SchoolOs">
+  <insert id="insert" parameterType="team.agile.campusnews.data.model.SchoolOs">
     insert into schoolos (id, name, parent_id, 
       remark, code)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="team.agile.campusnews.app.model.SchoolOs">
+  <insert id="insertSelective" parameterType="team.agile.campusnews.data.model.SchoolOs">
     insert into schoolos
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -74,7 +74,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.app.model.SchoolOs">
+  <update id="updateByPrimaryKeySelective" parameterType="team.agile.campusnews.data.model.SchoolOs">
     update schoolos
     <set>
       <if test="name != null">
@@ -92,7 +92,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.app.model.SchoolOs">
+  <update id="updateByPrimaryKey" parameterType="team.agile.campusnews.data.model.SchoolOs">
     update schoolos
     set name = #{name,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=INTEGER},

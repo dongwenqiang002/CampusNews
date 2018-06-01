@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrap">
-        <div class="ms-title">后台管理系统</div>
+        <div class="ms-title">西财新闻小叮当后台管理</div>
         <div class="ms-login">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
                 <el-form-item prop="username">
@@ -13,7 +13,7 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <!--<p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便填。</p>-->
+                <p style="font-size:12px;line-height:30px;color:#999;color: red">{{messagee}}</p>
             </el-form>
         </div>
     </div>
@@ -23,6 +23,7 @@
     export default {
         data: function () {
             return {
+                messagee:'',
                 ruleForm: {
                     username: '',
                     password: ''
@@ -50,18 +51,20 @@
                         let params = new URLSearchParams();
                         params.append('empNo', that.ruleForm.username);
                         params.append('password', that.ruleForm.password);
-                        this.$axios.post("http://172.20.0.24:8080/login", params).then((res) => {
+                        this.$axios.post("/login", params).then((res) => {
                             //this.tableData = res.data.list;
                             console.log(res)
                             if (res.data.data) {
-                                localStorage.setItem('ms_username', res.data.data.userName);
-                                localStorage.setItem('empNo',res.data.data.empNo);
-                                this.$router.push('/');
+                                localStorage.setItem('ms_username', res.data.user.name);
+                                localStorage.setItem('sessionId',res.data.sessionId);
+                                that.$router.push('/');
                             } else {
                                 console.log(res.data);
                             }
                         }).catch((e) => {
+                            that.messagee = "请检查用户名或密码"
                             console.log("登录异常")
+                            console.log(e);
                         })
 
                     } else {

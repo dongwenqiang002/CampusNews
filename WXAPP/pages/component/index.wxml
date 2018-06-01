@@ -5,11 +5,7 @@
 
     <view class="body">
         <view class="widgets">
-                <view class="widgets__item">
-                    <view class="widgets__info " bindtap="widgetsToggle">
-                        <image></image>
-                    </view>
-                </view>
+                
 
             <block wx:for-items="{{list}}" wx:key="item.id">
 

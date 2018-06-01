@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
@@ -32,13 +33,13 @@ public class FileServices {
     public void init() throws NoSuchFileException, FileNotFoundException {
         File dir = new File(fileDir);
         if (!dir.exists()) {
-            dir  = org.springframework.util.ResourceUtils.getFile("/file");
-            fileDir = dir.toString();
-            //fileDir = "E:/Desktop/project/file";
-           //dir = new File(fileDir);
+            dir  = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX);
+
+            dir = dir.getParentFile().getParentFile().listFiles((dir1, name) -> name.equals("file"))[0];
             if (!dir.exists()) {
                 throw new NoSuchFileException("文件路径" + "不存在");
             }
+            fileDir = dir.toString();
         }
         LOGGER.info("设置文件路径： {}",fileDir);
     }

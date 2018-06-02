@@ -10,6 +10,7 @@ import team.agile.campusnews.data.model.News;
 import team.agile.campusnews.data.model.User;
 import team.agile.campusnews.app.service.NewsService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class IndexController {
     private NewsService newsService;
 
     @GetMapping("/")
-    public List<News> index(HttpServletResponse response){
-
+    public List<News> index(HttpServletResponse response, HttpServletRequest request){
+        String requestType = request.getHeader("X-Requested-With");
         return  newsService.getNews();
     }
 

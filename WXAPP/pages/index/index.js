@@ -76,7 +76,7 @@ Page({
     app.userLogin();
     let that = this;
     wx.request({
-      url: app.globalData.services ,
+      url: app.globalData.services+"/news/" ,
       success: function (res) {
         that.setData({
           "news_list.items" : res.data

@@ -12,6 +12,7 @@ import team.agile.campusnews.app.service.NewsService;
 import team.agile.campusnews.app.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.List;
 
@@ -28,6 +29,12 @@ public class NewsController {
     private NewsService newsService;
     @Autowired
     private UserService userServicel;
+
+    @GetMapping("/")
+    public List<News> index(){
+        return  newsService.getNews();
+    }
+
 
     @GetMapping("/get")
     public List<News> getNews(Principal user, HttpServletRequest request) {

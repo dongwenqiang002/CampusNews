@@ -10,6 +10,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+        '/admin':{
+            target:'http://127.0.0.1:8088',
+            changeOrigin:true,
+        },
       '/api':{
           target:'http://jsonplaceholder.typicode.com',
           changeOrigin:true,

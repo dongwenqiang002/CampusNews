@@ -44,18 +44,18 @@ public class UserService implements UserDetailsService {
         User user;
         try {
             // 从数据库查找用户
-            user = userMapper.selectByUserName(username);
+
             if (username == null || username.isEmpty()) {
                 throw new UsernameNotFoundException("用户名不能为空");
             }
+            user = userMapper.selectByUserName(username);
             if (user == null || user.getUsername() == null || user.getUsername().isEmpty()) {
                 throw new UsernameNotFoundException("用户不存在");
             }
 
-            //TODO 这里添加验证用户 有效的代码
 
         } catch (Exception e) {
-            throw new UsernameNotFoundException("用户异常");
+            throw  e;
         }
         return user;
     }

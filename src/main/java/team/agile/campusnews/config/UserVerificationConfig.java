@@ -20,7 +20,7 @@ import java.util.Collection;
  *
  * 验证用户名与密码
  */
-@Component
+//@Component
 public class UserVerificationConfig implements AuthenticationProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserVerificationConfig.class);

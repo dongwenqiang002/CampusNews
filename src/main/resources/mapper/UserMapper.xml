@@ -12,7 +12,7 @@
     <result column="wxName" jdbcType="VARCHAR" property="wxName"/>
     <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
     <collection property="role" select="selectRoleByUserId" column="id" javaType="list" />
-    <collection property="schoolOs" select="team.agile.campusnews.app.dao.SchoolOsMapper.selectByUserId" column="id" javaType="list" />
+    <collection property="schoolOs" select="team.agile.campusnews.data.dao.SchoolOsMapper.selectByUserId" column="id" javaType="list" />
   </resultMap>
   <sql id="Base_Column_List">
     id, username, code, `name`, phone, sex, age ,wxName

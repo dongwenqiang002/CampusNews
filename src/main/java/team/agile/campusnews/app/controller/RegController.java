@@ -66,11 +66,11 @@ public class RegController {
                     userService.regUser(user, classId, "学生", schoolTime);
                     request.login(user.getUsername(),null);
                 } catch (ParseException | ServletException e1) {
-                    e1.printStackTrace();
+                    LOGGER.error(e1.getLocalizedMessage());
                 }
             }
 
-
+            LOGGER.info("登录用的 sessionID{}", request.getSession().getId());
             return request.getSession().getId();
         } catch (WxErrorException e) {
            LOGGER.error(e.getError().getErrorMsg());

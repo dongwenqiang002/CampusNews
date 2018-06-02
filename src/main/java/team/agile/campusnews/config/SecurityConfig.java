@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //设置登录拦截验证跳转
         http.authorizeRequests()
-                .antMatchers("/login/*","/file/**","/reg/**","/admin/login","/css/**","/js/**","/static/**").permitAll()
+                .antMatchers("/login/*","/file/**","/reg/**","/admin/login","/css/**","/js/**","/static/**","/news/").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginProcessingUrl("/login").loginPage("/login/NoLogin").failureForwardUrl("/login/loginNO").successForwardUrl("/login/loginOK").passwordParameter("password").usernameParameter("username")
                 .permitAll()

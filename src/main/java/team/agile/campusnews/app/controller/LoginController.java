@@ -68,14 +68,20 @@ public class LoginController {
             request.login(sess.getOpenid(),null);
 
         } catch (WxErrorException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
+            LOGGER.error(e.toString());
             return null;
         } catch (ServletException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
+            LOGGER.error(e.toString());
             return null;
         }catch (Exception e){
+            LOGGER.error(e.getMessage());
+            LOGGER.error(e.toString());
+            e.printStackTrace();
             return null;
         }
+        LOGGER.info("登录用的 sessionID{}", request.getSession().getId());
         return request.getSession().getId();
     }
 

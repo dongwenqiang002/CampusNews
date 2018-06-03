@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import team.agile.campusnews.data.model.User;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface UserMapper {
@@ -29,4 +30,5 @@ public interface UserMapper {
 
     User selectByUserName(String userName);
 
+    List selectBySchoolId(Integer schhoID);
 }

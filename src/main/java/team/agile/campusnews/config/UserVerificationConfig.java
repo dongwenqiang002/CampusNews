@@ -40,7 +40,7 @@ public class UserVerificationConfig implements AuthenticationProvider {
         UserDetails userDetials;
         try {
             //TODO 查询管理者用户
-            userDetials = null;
+            userDetials = adminService.getManageUserLogin(username,password);
         } catch (UsernameNotFoundException e) {
             return null;
         }
@@ -50,11 +50,8 @@ public class UserVerificationConfig implements AuthenticationProvider {
         authorities.add(new SimpleGrantedAuthority("管理员"));
 
         //判断用户密码是否正确
-        //String MD5Password = MD5Util.MD5(password);
-        if (password.equals("admin") && username.equals("admin")) {
+        if (userDetials != null  ) {
             return new UsernamePasswordAuthenticationToken(userDetials, password, authorities);
-        } else if (userDetials != null && userDetials.getUsername().equals(username) && userDetials.getPassword().equals(password)) {
-            return new UsernamePasswordAuthenticationToken(userDetials, password, userDetials.getAuthorities());
         } else {
             /*密码不正确*/
             return null;//new UsernamePasswordAuthenticationToken(userDetials,password,null);

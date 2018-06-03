@@ -25,8 +25,8 @@
             return {
                 messagee: '',
                 ruleForm: {
-                    username: '',
-                    password: ''
+                    username: 'admin',
+                    password: 'admin'
                 },
                 rules: {
                     username: [

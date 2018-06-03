@@ -32,12 +32,6 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @RequestMapping("/")
-    public ModelAndView login11(String username, String password) {
-        ModelAndView mv = new ModelAndView("/login");
-
-        return mv;
-    }
 
     @PostMapping("/login")
     @ResponseBody
@@ -49,8 +43,10 @@ public class AdminController {
             map.put("sessionId",request.getSession().getId());
             map.put("user",adminService.getManageUser(username));
         } catch (ServletException e) {
+            LOGGER.error(e.getLocalizedMessage());
             map.put("message","登录失败，请检查用户名或密码！");
         }catch (Exception e){
+            LOGGER.error(e.getLocalizedMessage());
             map.put("message","登录失败，请检查用户名或密码！");
         }
 

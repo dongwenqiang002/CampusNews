@@ -15,6 +15,7 @@ import team.agile.campusnews.data.model.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 董文强
@@ -123,5 +124,9 @@ public class UserService implements UserDetailsService {
         Date date = dateFormat.parse(schoolTime);
         userMapper.regUserStu(user.getCode(), id, date);
         return false;
+    }
+
+    public List getSchoolOSUser(Integer schhoID) {
+        return userMapper.selectBySchoolId(schhoID);
     }
 }

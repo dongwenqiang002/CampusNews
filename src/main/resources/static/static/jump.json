@@ -1,0 +1,90 @@
+[
+    {
+        "path": "/",
+        "redirect": "/dashboard"
+    },
+    {
+        "path": "/",
+        "component": "components/common/Home",
+        "meta": {
+            "title": "自述文件"
+        },
+        "children": [
+            {
+                "path": "/dashboard",
+                "component": "components/page/Dashboard",
+                "meta": {
+                    "title": "系统首页"
+                }
+            },
+            {
+                "path": "/table",
+                "component": "components/page/BaseTable",
+                "meta": {
+                    "title": "基础表格"
+                }
+            },
+            {
+                "path": "/tabs",
+                "component": "components/page/Tabs",
+                "meta": {
+                    "title": "tab选项卡"
+                }
+            },
+            {
+                "path": "/form",
+                "component": "components/page/BaseForm",
+                "meta": {
+                    "title": "基本表单"
+                }
+            },
+            {
+                "path": "/editor",
+                "component": "components/page/VueEditor",
+                "meta": {
+                    "title": "富文本编辑器"
+                }
+            },
+            {
+                "path": "/markdown",
+                "component": "components/page/Markdown",
+                "meta": {
+                    "title": "markdown编辑器"
+                }
+            },
+
+
+            {
+                "path": "/drag",
+                "component": "components/page/DragList",
+                "meta": {
+                    "title": "拖拽列表"
+                }
+            },
+            {
+                "path": "/permission",
+                "component": "components/page/Permission",
+                "meta": {
+                    "title": "权限测试",
+                    "permission": true
+                }
+            }
+        ]
+    },
+    {
+        "path": "/login",
+        "component": "components/page/Login"
+    },
+    {
+        "path": "/404",
+        "component": "components/page/404"
+    },
+    {
+        "path": "/403",
+        "component": "components/page/403"
+    },
+    {
+        "path": "*",
+        "redirect": "/404"
+    }
+]

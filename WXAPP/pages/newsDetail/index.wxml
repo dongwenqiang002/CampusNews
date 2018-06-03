@@ -1,7 +1,12 @@
 <!--pages/newsDetail/index.wxml-->
+
+<import src="../../wxParse/wxParse.wxml" />
 <view class="detail">
   <text class="title">{{news.title}}</text>
   <text class="author">作者：{{news.author}}</text>
    <text class="time">日期：{{news.pubdate}}</text>
-  <text class="context">{{news.context}}</text>
+   <text>\n\n</text>
+<view class="wxParse">
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>
 </view>

@@ -23,7 +23,12 @@
     from schoolos
     where parent_id = #{id,jdbcType=INTEGER}
   </select>
-
+  <select id="selectSchool"  resultType="team.agile.campusnews.data.model.SchoolOs">
+    select
+    <include refid="Base_Column_List" />
+    from schoolos
+    where parent_id is null
+  </select>
   <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
      	SELECT * FROM schoolos WHERE id IN( SELECT schoolos_id FROM user_schoolos WHERE user_id = #{userId})
   </select>

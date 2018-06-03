@@ -34,7 +34,15 @@ public class AdminService {
         User user = userMapper.selectByPrimaryKey(manageUser.getUserId());
         return user;
     }
-
+    public User getManageUserLogin(String username,String password) {
+        ManageUser manageUser = manageUserMapper.selectByUserName(username);
+        if (manageUser == null || manageUser.getUserId() == null) {
+            return null;
+        }
+        if(!password.equals(manageUser.getPassword()))return null;
+        User user = userMapper.selectByPrimaryKey(manageUser.getUserId());
+        return user;
+    }
     public List<Menu> getMenu() {
         return menuMapper.selectAll();
     }

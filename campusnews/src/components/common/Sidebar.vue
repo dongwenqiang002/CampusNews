@@ -47,16 +47,6 @@
             this.$axios.get("/admin/menu").then((res) => {
                if(res) {
                    this.items = res.data;
-                   this.$axios.get("/static/menu.json").then((res) => {
-                       if(res) {
-                           for (var key in res.data) {
-                               this.items.push(res.data[key])
-                           }
-                           console.log(this.items);
-                       }else {
-                           console.log("error")
-                       }
-                   })
                }else {
                    console.log("error")
                }

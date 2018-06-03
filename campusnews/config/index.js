@@ -14,6 +14,10 @@ module.exports = {
             target:'http://127.0.0.1:8088',
             changeOrigin:true,
         },
+        '/file':{
+            target:'http://127.0.0.1:8088',
+            changeOrigin:true,
+        },
       '/api':{
           target:'http://jsonplaceholder.typicode.com',
           changeOrigin:true,

@@ -22,4 +22,6 @@ public interface SchoolOsMapper {
     List<SchoolOs> selectByUserId(Integer userId);
 
     List<SchoolOs> selectByParentId(Integer id);
+
+    SchoolOs selectSchool();
 }

@@ -1,6 +1,6 @@
 var header = getApp().globalData.header;
 const app = getApp()
-
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -15,15 +15,17 @@ Page({
      author: 1,
      remark: "转载自CSDN",
      endTime: "2018-05-25T09:04:58.000+0000",
-     type: "学习"
-   }
+     type: "学习",
+    
+   },
+   article: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      options.id;
+    app.userLogin();
       console.log(options.id)
       let that = this;
       wx.request({
@@ -34,6 +36,9 @@ Page({
           that.setData({
             "news": res.data
           });
+          that.setData({
+            article: WxParse.wxParse('article', 'html', res.data.context, that, 5)
+          })
         },
         fail: function (r) {  
         }

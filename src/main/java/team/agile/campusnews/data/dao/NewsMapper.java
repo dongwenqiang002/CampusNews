@@ -25,4 +25,8 @@ public interface NewsMapper {
     List<News> selectByUserId(Integer userId);
 
     List<News> selectByUserAll(@Param("userId") Integer userId, @Param("sIds") List<Integer> schoolOsId);
+
+    List<News> selectByAuthorId(Integer authorId);
+
+    int pubNews(@Param("scId")Integer scId,@Param("userId")Integer userId,@Param("newsId")Integer newsId);
 }

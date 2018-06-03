@@ -15,10 +15,21 @@ export default new Router({
             component: resolve => require(['../components/common/Home.vue'], resolve),
             meta: { title: '自述文件' },
             children:[
+
                 {
                     path: '/dashboard',
                     component: resolve => require(['../components/page/Dashboard.vue'], resolve),
                     meta: { title: '系统首页' }
+                },
+                {
+                    path: '/addnews',
+                    component: resolve => require(['../components/page/AddNews.vue'], resolve),
+                    meta: { title: '添加新闻' }
+                },
+                {
+                    path: '/setnews',
+                    component: resolve => require(['../components/page/SetNews.vue'], resolve),
+                    meta: { title: '设置新闻' }
                 },
                 {
                     path: '/tabs',

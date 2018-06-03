@@ -1,6 +1,6 @@
 /*
 SQLyog Community v10.0 
-MySQL - 5.6.36 : Database - campusnews
+MySQL - 5.7.17-log : Database - campusnews
 *********************************************************************
 */
 
@@ -30,11 +30,11 @@ CREATE TABLE `manage_menu` (
   PRIMARY KEY (`id`),
   KEY `manage_menu_ibfk_1` (`parent_id`),
   CONSTRAINT `manage_menu_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `manage_menu` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `manage_menu` */
 
-insert  into `manage_menu`(`id`,`icon`,`index`,`title`,`parent_id`,`role_level`) values (1,'el-icon-star-on','dashboard','首页',NULL,1),(2,'el-icon-edit','editor','添加新闻',NULL,1);
+insert  into `manage_menu`(`id`,`icon`,`index`,`title`,`parent_id`,`role_level`) values (1,'el-icon-star-on','dashboard','首页',NULL,1),(2,'el-icon-edit','addnews','添加新闻',NULL,1),(3,'el-icon-setting','setnews','设置新闻接收群体',NULL,1);
 
 /*Table structure for table `manage_user` */
 
@@ -48,11 +48,11 @@ CREATE TABLE `manage_user` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `manage_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `manage_user` */
 
-insert  into `manage_user`(`id`,`username`,`password`,`user_id`) values (1,'admin','admin',1);
+insert  into `manage_user`(`id`,`username`,`password`,`user_id`) values (2,'admin','admin',16);
 
 /*Table structure for table `news` */
 
@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `news`;
 
 CREATE TABLE `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `context` varchar(3000) NOT NULL COMMENT '新闻主体内容',
+  `context` mediumtext NOT NULL COMMENT '新闻主体内容',
   `title` varchar(200) NOT NULL COMMENT '新闻标题',
   `pubdate` datetime NOT NULL COMMENT '新闻发布时间',
   `author` int(11) NOT NULL COMMENT '作者',
@@ -72,11 +72,9 @@ CREATE TABLE `news` (
   KEY `type` (`type`),
   CONSTRAINT `news_ibfk_1` FOREIGN KEY (`author`) REFERENCES `user` (`id`),
   CONSTRAINT `news_ibfk_2` FOREIGN KEY (`type`) REFERENCES `news_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 /*Data for the table `news` */
-
-insert  into `news`(`id`,`context`,`title`,`pubdate`,`author`,`remark`,`end_time`,`type`) values (1,'毋庸置疑，Spring Boot在众多从事Java微服务开发的程序员群体中是一个很特别的存在。说它特别是因为它确实简化了基于Spring技术栈的应用/微服务开发过程，使得我们能够很快速地就搭建起一个应用的脚手架并在其上进行项目的开发，再也不用像以前那样使用大量的XML或是注解了，应用在这样的约定优于配置的前提下可以以最快的速度创建出来。','我眼中的Spring Boot','2018-05-17 13:28:50',1,'转载自CSDN','2018-05-25 17:04:58',3);
 
 /*Table structure for table `news_detail` */
 
@@ -95,8 +93,6 @@ CREATE TABLE `news_detail` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `news_detail` */
-
-insert  into `news_detail`(`id`,`type_name`,`Importance`,`deadline`,`importance_deadline`,`news_id`) values (1,'学习',1,'2018-05-24','2018-05-20',1);
 
 /*Table structure for table `news_type` */
 
@@ -128,11 +124,9 @@ CREATE TABLE `publish_news` (
   CONSTRAINT `publish_news_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`),
   CONSTRAINT `publish_news_ibfk_2` FOREIGN KEY (`schoolOS_id`) REFERENCES `schoolos` (`id`),
   CONSTRAINT `publish_news_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `publish_news` */
-
-insert  into `publish_news`(`id`,`news_id`,`schoolOS_id`,`user_id`) values (1,1,1,1),(2,1,6,NULL);
 
 /*Table structure for table `role` */
 
@@ -156,7 +150,7 @@ CREATE TABLE `schoolos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL COMMENT '名称',
   `parent_id` int(11) DEFAULT NULL COMMENT '父组织ID',
-  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `remark` varchar(100) NOT NULL COMMENT '备注',
   `code` varchar(100) DEFAULT NULL COMMENT '编号',
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`),
@@ -182,11 +176,11 @@ CREATE TABLE `user` (
   `wxName` varchar(50) DEFAULT NULL COMMENT '微信名',
   `avatarUrl` varchar(200) DEFAULT NULL COMMENT '微信头像',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`,`wxName`,`avatarUrl`) values (1,'111','2211789','石娟','18829503014','女',20,NULL,NULL);
+insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`,`wxName`,`avatarUrl`) values (16,'opVkf5ZUIaRUfYWO5CGbecbUpHIc','23213123','石娟',NULL,'男',NULL,NULL,NULL);
 
 /*Table structure for table `user_role` */
 
@@ -201,9 +195,11 @@ CREATE TABLE `user_role` (
   KEY `role` (`role_id`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_role` */
+
+insert  into `user_role`(`id`,`user_id`,`role_id`) values (18,16,1),(19,16,4);
 
 /*Table structure for table `user_schoolos` */
 
@@ -218,9 +214,11 @@ CREATE TABLE `user_schoolos` (
   KEY `schoolOS_is` (`schoolOS_id`),
   CONSTRAINT `user_schoolos_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_schoolos_ibfk_2` FOREIGN KEY (`schoolOS_id`) REFERENCES `schoolos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_schoolos` */
+
+insert  into `user_schoolos`(`id`,`user_id`,`schoolOS_id`) values (17,16,21);
 
 /*Table structure for table `user_student` */
 
@@ -233,9 +231,11 @@ CREATE TABLE `user_student` (
   `school_time` date DEFAULT NULL COMMENT '入学时间',
   `grade` int(11) DEFAULT NULL COMMENT '所在的第几界',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_student` */
+
+insert  into `user_student`(`id`,`stu_code`,`user_id`,`school_time`,`grade`) values (12,'23213123',16,'2015-08-31',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

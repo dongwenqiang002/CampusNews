@@ -32,15 +32,20 @@ public class FileServices {
     @PostConstruct
     public void init() throws NoSuchFileException, FileNotFoundException {
         File dir = new File(fileDir);
-        if (!dir.exists()) {
-            dir  = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX);
-
-            dir = dir.getParentFile().getParentFile().listFiles((dir1, name) -> name.equals("file"))[0];
+        try {
             if (!dir.exists()) {
-                throw new NoSuchFileException("文件路径" + "不存在");
+                dir  = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX);
+
+                dir = dir.getParentFile().getParentFile().listFiles((dir1, name) -> name.equals("file"))[0];
+                if (!dir.exists()) {
+                    throw new NoSuchFileException("文件路径" + "不存在");
+                }
+                fileDir = dir.toString();
             }
-            fileDir = dir.toString();
+        }catch (Exception e){
+            fileDir="/root/news/file";
         }
+
         LOGGER.info("设置文件路径： {}",fileDir);
     }
 

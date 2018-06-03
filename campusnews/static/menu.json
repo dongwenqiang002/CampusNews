@@ -32,11 +32,6 @@
             {
                 "index": "form",
                 "title": "基本表单",
-                "subs": [
-                    {
-                        "index": "form",
-                        "title": "基本表单"
-                    }]
             },
             {
                 "index": "editor",

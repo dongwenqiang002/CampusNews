@@ -26,12 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     WxVerificationConfig wxVerificationConfig;
+    @Autowired
+    UserVerificationConfig userVerificationConfig;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //设置登录拦截验证跳转
         http.authorizeRequests()
-                .antMatchers("/login/*","/file/**","/reg/**","/admin/login","/css/**","/js/**","/static/**","/news/").permitAll()
+                .antMatchers("/login/*","/file/**","/reg/**","/admin/login","/css/**","/js/**","/static/**","/news/","/admin/login").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginProcessingUrl("/login").loginPage("/login/NoLogin").failureForwardUrl("/login/loginNO").successForwardUrl("/login/loginOK").passwordParameter("password").usernameParameter("username")
                 .permitAll()
@@ -46,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        // auth.userDetailsService(userService);
         //设置登录验证规则为 UserVerificationConfig 类
-        auth.authenticationProvider(wxVerificationConfig);
+        auth.authenticationProvider(wxVerificationConfig).authenticationProvider(userVerificationConfig);
     }
 
 

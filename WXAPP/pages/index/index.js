@@ -97,5 +97,20 @@ Page({
     wx.navigateTo({
       url: '../list/index?type=' + event.currentTarget.dataset.type
     })
-  }
+  },
+
+//拉动刷新
+onPullDownRefresh: function () {
+    let that = this;
+    wx.request({
+      url: app.globalData.services + "/news/",
+      success: function (res) {
+        that.setData({
+          "news_list.items": res.data
+        });
+      }
+    })
+  },
+
+
 })

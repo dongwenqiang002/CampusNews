@@ -60,4 +60,20 @@ Page({
       title: this.title
     })
   },
+
+  //拉动刷新
+  onPullDownRefresh: function () {
+    let that = this;
+    wx.request({
+      url: app.globalData.services + '/news/get',
+      header: header,
+      success: function (res) {
+        that.setData({
+          "news_list.items": res.data
+        });
+      },
+      fail: function (r) {
+      }
+    });
+  },
 })

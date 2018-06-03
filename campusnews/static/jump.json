@@ -11,13 +11,6 @@
         },
         "children": [
             {
-                "path": "/test",
-                "component": "components/page/test",
-                "meta":{
-                    "title": "测试"
-                }
-            },
-            {
                 "path": "/dashboard",
                 "component": "components/page/Dashboard",
                 "meta": {
@@ -59,20 +52,8 @@
                     "title": "markdown编辑器"
                 }
             },
-            {
-                "path": "/upload",
-                "component": "components/page/Upload",
-                "meta": {
-                    "title": "文件上传"
-                }
-            },
-            {
-                "path": "/charts",
-                "component": "components/page/BaseCharts",
-                "meta": {
-                    "title": "schart图表"
-                }
-            },
+
+
             {
                 "path": "/drag",
                 "component": "components/page/DragList",

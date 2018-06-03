@@ -23,7 +23,7 @@
     export default {
         data: function () {
             return {
-                messagee:'',
+                messagee: '',
                 ruleForm: {
                     username: '',
                     password: ''
@@ -49,17 +49,18 @@
                         //在这里提交用户名和密码
                         //---------------------------
                         let params = new URLSearchParams();
-                        params.append('empNo', that.ruleForm.username);
+                        params.append('username', that.ruleForm.username);
                         params.append('password', that.ruleForm.password);
-                        this.$axios.post("/login", params).then((res) => {
+                        this.$axios.post("/admin/login", params).then((res) => {
                             //this.tableData = res.data.list;
                             console.log(res)
-                            if (res.data.data) {
+                            if (res.data.user) {
                                 localStorage.setItem('ms_username', res.data.user.name);
-                                localStorage.setItem('sessionId',res.data.sessionId);
+                                localStorage.setItem('sessionId', res.data.sessionId);
                                 that.$router.push('/');
                             } else {
                                 console.log(res.data);
+                                that.messagee = res.data.message;
                             }
                         }).catch((e) => {
                             that.messagee = "请检查用户名或密码"

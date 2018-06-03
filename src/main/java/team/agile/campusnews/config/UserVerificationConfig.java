@@ -8,19 +8,19 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import team.agile.campusnews.manage.service.AdminService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- *
  * 验证用户名与密码
  */
-//@Component
+@Component
 public class UserVerificationConfig implements AuthenticationProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserVerificationConfig.class);
@@ -29,26 +29,32 @@ public class UserVerificationConfig implements AuthenticationProvider {
     private AdminService adminService;
 
 
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        UserDetails userDetials;
-
-        try {
-            userDetials = null;
-        }catch (UsernameNotFoundException e){
+        if (password == null || password.isEmpty()) {
             return null;
         }
-        //获取用户权限列表
-        Collection<? extends GrantedAuthority> authorities = userDetials.getAuthorities();
+        UserDetails userDetials;
+        try {
+            //TODO 查询管理者用户
+            userDetials = null;
+        } catch (UsernameNotFoundException e) {
+            return null;
+        }
+        //TODO 获取用户权限列表
+        // Collection<? extends GrantedAuthority> authorities = userDetials.getAuthorities();
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("管理员"));
 
         //判断用户密码是否正确
         //String MD5Password = MD5Util.MD5(password);
-        if (password.equals(userDetials.getPassword())) {
+        if (password.equals("admin") && username.equals("admin")) {
             return new UsernamePasswordAuthenticationToken(userDetials, password, authorities);
+        } else if (userDetials != null && userDetials.getUsername().equals(username) && userDetials.getPassword().equals(password)) {
+            return new UsernamePasswordAuthenticationToken(userDetials, password, userDetials.getAuthorities());
         } else {
             /*密码不正确*/
             return null;//new UsernamePasswordAuthenticationToken(userDetials,password,null);
@@ -57,7 +63,6 @@ public class UserVerificationConfig implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> arg0) {
-        LOGGER.error(arg0.getName());
         return true;
     }
 

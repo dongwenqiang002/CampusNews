@@ -1,6 +1,6 @@
 /*
 SQLyog Community v10.0 
-MySQL - 5.7.17-log : Database - campusnews
+MySQL - 5.6.36 : Database - campusnews
 *********************************************************************
 */
 
@@ -15,6 +15,44 @@ MySQL - 5.7.17-log : Database - campusnews
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`campusnews` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `campusnews`;
+
+/*Table structure for table `manage_menu` */
+
+DROP TABLE IF EXISTS `manage_menu`;
+
+CREATE TABLE `manage_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `icon` varchar(50) DEFAULT NULL,
+  `index` varchar(50) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `role_level` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `manage_menu_ibfk_1` (`parent_id`),
+  CONSTRAINT `manage_menu_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `manage_menu` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `manage_menu` */
+
+insert  into `manage_menu`(`id`,`icon`,`index`,`title`,`parent_id`,`role_level`) values (1,'el-icon-star-on','dashboard','首页',NULL,1),(2,'el-icon-edit','editor','添加新闻',NULL,1);
+
+/*Table structure for table `manage_user` */
+
+DROP TABLE IF EXISTS `manage_user`;
+
+CREATE TABLE `manage_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `manage_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `manage_user` */
+
+insert  into `manage_user`(`id`,`username`,`password`,`user_id`) values (1,'admin','admin',1);
 
 /*Table structure for table `news` */
 
@@ -144,11 +182,11 @@ CREATE TABLE `user` (
   `wxName` varchar(50) DEFAULT NULL COMMENT '微信名',
   `avatarUrl` varchar(200) DEFAULT NULL COMMENT '微信头像',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`,`wxName`,`avatarUrl`) values (1,'111','2211789','董文强','18892061129','男',22,NULL,NULL),(2,'oPpou5TrPtEdgfZIQaL_uuMj8rfk1','2211454','石娟','18829503014','女',21,NULL,NULL),(5,'oPpou5TrPtEdgfZIQaL_uuMj8rfk3','dwqq','石娟',NULL,'男',NULL,NULL,NULL),(6,'oPpou5TrPtEdgfZIQaL_uuMj8rfk33','sss','石娟',NULL,'男',NULL,NULL,NULL),(7,'oPpou5TrPtEdgfZIQaL_uuMj8rfk333','11','石娟',NULL,'男',NULL,NULL,NULL),(8,'oPpou5TrPtEdgfZIQaL_uuMj8rfk234234','212','是是是',NULL,'男',NULL,NULL,NULL),(9,'oPpou5TrPtEdgfZIQaL_uuMj8rfk234234234','123','石娟',NULL,'男',NULL,NULL,NULL),(10,'oPpou5TrPtEdgfZIQaL_uuMj8rfk544','是是是','老王',NULL,'男',NULL,NULL,NULL),(11,'oPpou5TrPtEdgfZIQaL_uuMj8rfk11','我的天','去去去',NULL,'男',NULL,NULL,NULL),(12,'oPpou5TrPtEdgfZIQaL_uuMj8rfk888','是是是','你是谁',NULL,'男',NULL,NULL,NULL),(13,'oPpou5TrPtEdgfZIQaL_uuMj8rfk','20144','带我去',NULL,'男',NULL,NULL,NULL);
+insert  into `user`(`id`,`username`,`code`,`name`,`phone`,`sex`,`age`,`wxName`,`avatarUrl`) values (1,'111','2211789','石娟','18829503014','女',20,NULL,NULL);
 
 /*Table structure for table `user_role` */
 
@@ -163,11 +201,9 @@ CREATE TABLE `user_role` (
   KEY `role` (`role_id`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_role` */
-
-insert  into `user_role`(`id`,`user_id`,`role_id`) values (1,1,4),(4,1,1),(2,2,1),(3,2,5),(7,5,1),(8,6,1),(9,7,1),(10,8,1),(11,9,1),(12,10,1),(13,11,1),(14,12,1),(15,13,1);
 
 /*Table structure for table `user_schoolos` */
 
@@ -182,11 +218,9 @@ CREATE TABLE `user_schoolos` (
   KEY `schoolOS_is` (`schoolOS_id`),
   CONSTRAINT `user_schoolos_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_schoolos_ibfk_2` FOREIGN KEY (`schoolOS_id`) REFERENCES `schoolos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_schoolos` */
-
-insert  into `user_schoolos`(`id`,`user_id`,`schoolOS_id`) values (1,1,18),(2,2,19),(3,1,15),(6,5,19),(7,6,21),(8,7,21),(9,8,21),(10,9,23),(11,10,19),(12,11,21),(13,12,19),(14,13,19);
 
 /*Table structure for table `user_student` */
 
@@ -199,11 +233,9 @@ CREATE TABLE `user_student` (
   `school_time` date DEFAULT NULL COMMENT '入学时间',
   `grade` int(11) DEFAULT NULL COMMENT '所在的第几界',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_student` */
-
-insert  into `user_student`(`id`,`stu_code`,`user_id`,`school_time`,`grade`) values (1,'dwqq',5,'2013-05-30',NULL),(2,'sss',6,'2015-08-31',NULL),(3,'11',7,'2015-08-31',NULL),(4,'212',8,'2015-08-31',NULL),(5,'123',9,'2015-08-31',NULL),(6,'是是是',10,'2014-08-31',NULL),(7,'我的天',11,'2015-08-31',NULL),(8,'是是是',12,'2015-08-31',NULL),(9,'20144',13,'2015-08-31',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

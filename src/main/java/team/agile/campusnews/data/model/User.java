@@ -123,6 +123,8 @@ public class User implements UserDetails {
     public void setRole(List<String> role) {
         this.role = role;
     }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> ro = new ArrayList<>();

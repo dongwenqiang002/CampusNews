@@ -16,7 +16,10 @@ import team.agile.campusnews.app.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Action;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Time 2018/5/17 11:22
@@ -35,24 +38,19 @@ public class LoginController {
      * @return 没有登录的内容
      */
     @GetMapping("/NoLogin")
-    public boolean noLogin() {
+    public boolean noLogin(HttpServletResponse response) {
+        response.setStatus(401);
         //TODO 没有登录
         return false;
-     /*   return "您没登录" +
-                "<h1>测试使用的POST登录</h1>" +
-                " <form action=\"/login\" method=\"post\">\n" +
-                "            <input name=\"username\"/>\n" +
-                "            <input name=\"password\"/>\n" +
-                "            <button type=\"submit\">提交</button>\n" +
-                "        </form>";*/
     }
+
+
 
     /**
      * 使用微信小程序前端发来的code向腾讯的微信服务器上获取信息
      * @param code 前端发来的
-     * @return //TODO
+     * @return
      * */
-    //todo
     @RequestMapping("/wxlogin")
     @ResponseBody
     public String wxLogin(String code, HttpServletRequest request){

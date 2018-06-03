@@ -24,11 +24,6 @@ public class IndexController {
     @Autowired
     private NewsService newsService;
 
-    @GetMapping("/")
-    public List<News> index(HttpServletResponse response, HttpServletRequest request){
-        String requestType = request.getHeader("X-Requested-With");
-        return  newsService.getNews();
-    }
 
 
 

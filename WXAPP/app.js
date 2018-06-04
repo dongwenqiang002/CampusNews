@@ -42,7 +42,40 @@ App({
       }
     })
   },
-
+  WXlogin: function () {
+    var that = this;
+    wx.login({
+      success: function (logRes) {
+        //获取code
+        if (logRes.code) {
+          console.log(logRes.code);
+          wx.request({
+            url: that.globalData.services + '/login/wxlogin',
+            data: {
+              code: logRes.code
+            },
+            success: function (res) {
+              console.log(res.data)
+              if (res.data) {
+                that.globalData.header.Cookie = 'JSESSIONID=' + res.data;
+                that.globalData.userInfo = { nickName: '登录成功' };  // .userInfo;
+                typeof cb == "function" && cb(that.globalData.userInfo)
+              } else {
+                wx.redirectTo({
+                  url: '/pages/reg/reg',
+                })
+              }
+            },
+            fail: function (e) {
+              wx.redirectTo({
+                url: '/pages/reg/reg',
+              })
+            }
+          })
+        }
+      }
+    })
+  },
   getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {

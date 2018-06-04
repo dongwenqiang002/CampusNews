@@ -44,6 +44,7 @@ Page({
     let that = this;
      // column: column, value: value
     //console.log(v.detail.column);
+    if (v.detail.column == 2) return;
     let sc = this.data.schoolOSS[v.detail.column][v.detail.value];
     console.log("一次改变")
     if(sc == undefined)return;

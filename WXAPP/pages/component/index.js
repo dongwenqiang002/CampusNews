@@ -24,6 +24,7 @@ Page({
       url: app.globalData.services + '/news/userDetail',
       header: header,
       success: function (res) {
+        console.log(res);
         that.setData({
           "list": res.data
         });

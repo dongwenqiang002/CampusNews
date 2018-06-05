@@ -15,7 +15,7 @@ spring:
         encoding: UTF-8
         cache: false #开发时关闭缓存,不然没法看到实时页面
         prefix: classpath:/templates
-logging.level.team: debug
+#logging.level.team: debug
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: team.agile.campusnews.data.model

@@ -78,13 +78,19 @@ public class NewsController {
         User u = (User) userServicel.loadUserByUsername(user.getName());
         //user
         //  user.setPassword("123");
+        String schoolName = "";
+        try {
+            schoolName = u.getSchoolOs().get(0).getParentSchoolOs().getParentSchoolOs().getName();
+        }catch (Exception e){
+             schoolName = "无";
+        }
         return "[\n" +
                 "  {\n" +
                 "  \"name\": \"姓名\",\n" +
                 "  \"data\": \""+u.getName()+"\"\n" +
                 "  }, {\n" +
                 "  \"name\": \"学院\",\n" +
-                "  \"data\": \""+u.getSchoolOs().get(0).getParentSchoolOs().getName()+"\"\n" +
+                "  \"data\": \""+schoolName+"\"\n" +
                 "}, {\n" +
                 "  \"name\": \"班级\",\n" +
                 "  \"data\": \""+u.getSchoolOs().get(0).getName()+"\"\n" +

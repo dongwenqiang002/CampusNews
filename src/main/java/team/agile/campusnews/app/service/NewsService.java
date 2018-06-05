@@ -29,8 +29,8 @@ public class NewsService {
     /**
      * @param userName 用户名
      * @return 此用户可以看到的新闻
-     * @exception null
-     * */
+     * @throws null
+     */
     public List<News> getNews(String userName) {
         List<News> list = new ArrayList<>(15);
         try {
@@ -48,7 +48,17 @@ public class NewsService {
                 }
             });
             //通过用户ID和用户所属组织获取所有News
-            return newsMapper.selectByUserAll(user.getId(), schoolOsIds);
+            List<News> newsList = newsMapper.selectByUserAll(user.getId(), schoolOsIds);
+            newsList.sort((dt1,dt2) -> {
+                if (dt1.getPubdate().getTime() < dt2.getPubdate().getTime()) {
+                    return 1;
+                } else if (dt1.getPubdate().getTime() > dt2.getPubdate().getTime()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+            return newsList;
 
         } catch (Exception e) {
             LOGGER.error(e.toString());
@@ -60,14 +70,25 @@ public class NewsService {
 
 
     public News getNews(Integer newsId) {
-        return  newsMapper.selectByPrimaryKey(newsId);
+        return newsMapper.selectByPrimaryKey(newsId);
     }
+
     /**
      * @return 学校大事件
-     * @exception null
-     * */
-    public List<News> getNews(){
-        return newsMapper.selectBySchoolOsID(1);
+     * @throws null
+     */
+    public List<News> getNews() {
+        List<News> newsList =  newsMapper.selectBySchoolOsID(1);
+        newsList.sort((dt1,dt2) -> {
+            if (dt1.getPubdate().getTime() < dt2.getPubdate().getTime()) {
+                return 1;
+            } else if (dt1.getPubdate().getTime() > dt2.getPubdate().getTime()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        return newsList;
     }
 
     @Autowired

@@ -41,7 +41,17 @@ public class AdminNewsService {
     }
     public List<News> getNewsList(Integer id) {
         //User user = adminService.getManageUser(id);
-        return newsMapper.selectByAuthorId(id);
+        List<News> newsList = newsMapper.selectByAuthorId(id);
+        newsList.sort((dt1,dt2) -> {
+            if (dt1.getPubdate().getTime() < dt2.getPubdate().getTime()) {
+                return 1;
+            } else if (dt1.getPubdate().getTime() > dt2.getPubdate().getTime()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        return newsList;
     }
 
     public boolean pubNews(List<Map> scMap, List<Map> userMap,Integer newsId) {

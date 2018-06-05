@@ -30,7 +30,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="selectByUserAll" resultMap="BaseResultMap">
-        SELECT * FROM news WHERE id IN (
+        SELECT id, title, pubdate, author, remark, end_time, `type` FROM news WHERE id IN (
         SELECT news_id FROM publish_news WHERE user_id =#{userId} OR schoolOS_id IN
         <foreach collection="sIds" item="schoolOsId"
                  open="(" close=")" separator=",">
@@ -40,16 +40,16 @@
     </select>
 
     <select id="selectBySchoolOsID" parameterType="int" resultMap="BaseResultMap">
-    SELECT * FROM news WHERE id IN (
+    SELECT id,  title, pubdate, author, remark, end_time, `type` FROM news WHERE id IN (
 	 SELECT news_id FROM publish_news WHERE schoolOS_id = #{schoolOsID})
   </select>
 
     <select id="selectByUserId" parameterType="int" resultMap="BaseResultMap">
-      SELECT * FROM news WHERE id IN (
+      SELECT id,  title, pubdate, author, remark, end_time, `type` FROM news WHERE id IN (
 	    SELECT news_id FROM publish_news WHERE user_id = #{userId})
     </select>
     <select id="selectByAuthorId" parameterType="int" resultMap="BaseResultMap">
-      SELECT * FROM news WHERE  author = #{authorId}
+      SELECT  id,  title, pubdate, author, end_time, `type` FROM news WHERE  author = #{authorId}
     </select>
 
 

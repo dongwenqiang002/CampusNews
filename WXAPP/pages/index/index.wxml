@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <import src="../../template/item-template.wxml" />
+<wxs module="timesFun" src="../../utils/time.wxs"></wxs>
 <view class="container">
 
   <view class="section section_gap swiper_box">
@@ -18,7 +19,7 @@
       <text class="title">{{ item.title }}</text>
     </view>
     <view>
-      <text class="tag">作者： {{ item.author }}, 发布时间： {{item.pubdate }}</text>
+      <text class="tag">作者： {{ item.author }}, 发布时间： {{ timesFun.timesFun.fun(item.pubdate) }}</text>
     </view>
   </view>
  

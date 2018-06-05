@@ -8,7 +8,7 @@ App({
     wx.setStorageSync('logs', logs)
    
   },
- 
+  
   userLogin: function () {
     var that = this;
     wx.login({

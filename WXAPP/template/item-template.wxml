@@ -15,7 +15,7 @@
   <block wx:for="{{navs}}" wx:key="item.id">
     <view class="l-c-c" catchtap="go" data-type="{{item.text}}">
       <image src="{{item.image}}" class="slide-image"/>
-      <text>{{item.text}}</text>
+      <!--<text>{{item.text}}</text>-->
     </view>
   </block>
 </template>

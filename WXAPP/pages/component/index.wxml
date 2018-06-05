@@ -1,4 +1,4 @@
-<view class="index" style="width:100%;height:100vh;background-size:100% 100%;background-image: url('../../image/aaaa.jpg')">
+<view class="index" style="width:100%;height:100vh;background-size:100% 100%;background-image: url('http://111.230.72.117:8088/file/image/123.jpg')">
     <view class="head">
         <view class="title">个人主页</view>
     </view>
@@ -10,7 +10,7 @@
             <block wx:for-items="{{list}}" wx:key="item.id">
 
                 <view class="widgets__item">
-                    <view  class="widgets__info " bindtap="widgetsToggle">
+                    <view  class="widgets__info " bindtap="widgetsToggle" style="background-size:100% 100%;background-image: url('http://111.230.72.117:8088/file/image/www.jpg')"> 
                         <text class="widgets__info-name">{{item.name}}</text>
                          <text class="widgets__info-name">{{item.data}}</text>
                     </view>

@@ -1,4 +1,4 @@
-<view class="index">
+<view class="index" style="width:100%;height:100vh;background-size:100% 100%;background-image: url('../../image/aaaa.jpg')">
     <view class="head">
         <view class="title">个人主页</view>
     </view>

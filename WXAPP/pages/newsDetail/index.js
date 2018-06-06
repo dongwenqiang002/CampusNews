@@ -7,7 +7,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.userLogin();
       console.log(options.id)
       let that = this;
       wx.request({
@@ -18,11 +17,15 @@ Page({
           that.setData({
             "news": res.data
           });
+          var hh = WxParse.wxParse('article', 'html', res.data.context, that, 5);
+          if(hh){
           that.setData({
-            article: WxParse.wxParse('article', 'html', res.data.context, that, 5)
+            article: hh 
           })
+          }
         },
-        fail: function (r) {  
+        fail: function (r, statusCode) {  
+          wx.showToast('加载失败');
         }
       });
   },

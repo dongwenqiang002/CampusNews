@@ -9,6 +9,7 @@ import "babel-polyfill";
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 //axios.defaults.baseURL = 'http://127.0.0.1:8088'
+
 // http响应拦截器
 axios.interceptors.response.use(data => {// 响应成功关闭loading
        // loadinginstace.close()

@@ -45,7 +45,6 @@
                 let that = this;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-
                         //在这里提交用户名和密码
                         //---------------------------
                         let params = new URLSearchParams();

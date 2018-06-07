@@ -162,6 +162,7 @@
         },
         //在显示之前
         beforeRouteEnter(to, from, next) {
+            console.log("---------hahahahahah")
             //vm是组件的实例
             next(vm => {
                 vm.thisNewsId = to.query.newsId;
